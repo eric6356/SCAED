@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { Accounts } from 'meteor/accounts-base';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { ActiveRoute } from 'meteor/zimme:active-route';
@@ -52,8 +51,3 @@ FlowRouter.route('/logout', {
 //         BlazeLayout.render('App_body', { main: 'App_notFound' });
 //     }
 // };
-
-Accounts.onLogin(() => {
-    const next = FlowRouter.current().queryParams.next || '/';
-    FlowRouter.go(next);
-});
