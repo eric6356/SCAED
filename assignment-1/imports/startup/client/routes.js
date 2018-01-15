@@ -9,7 +9,7 @@ ActiveRoute.configure({ activeClass: 'pure-menu-selected' });
 BlazeLayout.setRoot('body');
 
 // Import needed templates
-import '../../ui/layouts/body/body.js';
+import '../../ui/layout/layout.js';
 import '../../ui/pages/home/home.js';
 import '../../ui/pages/account/account.js';
 import '../../ui/pages/access/access.js';
