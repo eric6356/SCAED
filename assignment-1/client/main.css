@@ -16,3 +16,7 @@ body {
     width: 140px;
     background-color: rgb(248, 248, 248);
 }
+
+.sidebar .pure-menu .menu-item-divided {
+    border-top: 1px solid #999;
+}
