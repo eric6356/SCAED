@@ -1,5 +1,8 @@
-class Account {
+import * as c from './collections';
+
+class Account extends c.Account {
     constructor(username, firstName, lastName) {
+        super();
         this.username = username;
         this.person = new Person(this, firstName, lastName);
         this.roles = [];
@@ -19,8 +22,9 @@ class Account {
     }
 }
 
-class Person {
+class Person extends c.Person {
     constructor(account, firstName, lastName) {
+        super();
         this.account = account;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -34,8 +38,9 @@ class Person {
     }
 }
 
-class Contact {
+class Contact extends c.Contact {
     constructor(person, email, address, phone) {
+        super();
         this.person = person;
         this.email = email;
         this.address = address;
@@ -43,16 +48,18 @@ class Contact {
     }
 }
 
-class JobProfile {
+class JobProfile extends c.JobProfile {
     constructor(title, description, baseSalary) {
+        super();
         this.title = title;
         this.description = description;
         this.baseSalary = baseSalary;
     }
 }
 
-class Role {
+class Role extends c.Role {
     constructor(name) {
+        super();
         this.name = name;
         this.accessMap = {};
     }
@@ -70,8 +77,9 @@ class Role {
     }
 }
 
-class Access {
-    constructor(code, description) {
+class Access extends c.Access {
+    constructor(code, description = '') {
+        super();
         this.code = code;
         this.description = description;
     }
