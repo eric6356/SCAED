@@ -3,8 +3,6 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { ActiveRoute } from 'meteor/zimme:active-route';
 
-ActiveRoute.configure({ activeClass: 'pure-menu-selected' });
-
 BlazeLayout.setRoot('body');
 
 // Import needed templates

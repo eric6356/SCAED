@@ -1,5 +1,49 @@
 <template name="App_body">
-  <div class="container">
+  <div class="aside-wrapper flex-center">
+    <div class="container-wider">
+      <div class="height-100 flex-left">
+        <aside class="unit-1-4 flex-vertical scroll-view aside">
+          <ul class="aside-menu-list top-gap-0 unit-0">
+            <li>
+              <a href="{{pathFor 'account'}}" class="{{isActiveRoute 'account'}}">
+                Account
+              </a>
+            </li>
+            <li>
+              <a href="{{pathFor 'access'}}" class="{{isActiveRoute 'access'}}">
+                Access
+              </a>
+            </li>
+            <li>2</li>
+            <li>3</li>
+          </ul>
+          <ul class="aside-menu-list top-gap-0 unit"></ul>
+          <ul class="aside-menu-list top-gap-0 unit-0">
+            <li>
+              <a href="{{pathFor 'logout'}}">
+                Logout
+              </a>
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-wrapper">
+    <div class="flex-center">
+      <div class="container-wider">
+        <div class="flex-left units-gap-big">
+          <div class="site-height-0 unit-1-4"></div>
+          <div class="main unit-3-4">
+            {{> Template.dynamic template=main}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="container">
     <div class="sidebar">
       <div class="pure-menu">
         <a class="pure-menu-heading" href="{{pathFor 'home'}}">
@@ -25,7 +69,7 @@
       </div>
     </div>
     <div class="main">
-      {{> Template.dynamic template=main}}
-    </div>
-  </div>
+                
+    </div> -->
+  <!-- </div> -->
 </template>
