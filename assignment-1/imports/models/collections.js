@@ -6,111 +6,109 @@ export const Account = Class.create({
     name: 'Account',
     collection: Meteor.users,
     fields: {
-        personID: Mongo.ObjectID,
-        username: {
-            type: String,
-            validators: [{ type: 'notNull' }]
+        personID: {
+            type: Mongo.ObjectID,
+            optional: true
         },
-        roleIDs: [Mongo.ObjectID]
-    },
-    indexes: {
-        username: { fields: { username: 1 }, options: { unique: true } }
+        username: String,
+        roleIDs: {
+            type: [Mongo.ObjectID],
+            default: []
+        }
     }
 });
 
 export const Person = Class.create({
     name: 'Person',
-    collection: new Mongo.Collection('people'),
+    collection: new Mongo.Collection('people', { idGeneration: 'MONGO' }),
     fields: {
         firstName: {
             type: String,
-            validators: [{ type: 'string' }, { type: 'notNull' }]
+            validators: [{ type: 'string' }]
         },
         lastName: {
             type: String,
-            validators: [{ type: 'string' }, { type: 'notNull' }]
+            validators: [{ type: 'string' }]
         },
-        accountID: {
-            type: Mongo.ObjectID,
-            validators: [{ type: 'notNull' }]
+        accountID: String,
+        jobProfileID: Mongo.ObjectID,
+        managerID: {
+            type: String,
+            optional: true
         },
-        jobProfileID: {
-            type: Mongo.ObjectID,
-            validators: [{ type: 'notNull' }]
-        },
-        managerID: Mongo.ObjectID,
         contactID: {
             type: Mongo.ObjectID,
-            validators: [{ type: 'notNull' }]
+            optional: true
         }
+    },
+    helpers: {
+        getFullName: () => `${this.firstName} ${this.lastName}`
     }
 });
 
 export const Contact = Class.create({
     name: 'Contact',
-    collection: new Mongo.Collection('contacts'),
+    collection: new Mongo.Collection('contacts', { idGeneration: 'MONGO' }),
     fields: {
-        personID: {
-            type: Mongo.ObjectID,
-            validators: [{ type: 'notNull' }]
-        },
+        personID: Mongo.ObjectID,
         email: {
             type: String,
-            validators: [{ type: 'email' }, { type: 'notNull' }]
+            validators: [{ type: 'email' }]
         },
-        address: {
-            type: String,
-            validators: [{ type: 'notNull' }]
-        },
+        address: String,
         phone: {
             type: String,
-            validators: [{ type: 'notNull' }, { type: 'regexp', param: /\+?\d+/ }] // FIXME
+            validators: [{ type: 'regexp', param: /\+?\d+/ }] // FIXME
         }
     },
     indexes: {
-        title: { fields: { email: 1 }, options: { unique: true } }
+        email: { fields: { email: 1 }, options: { unique: true } }
     }
 });
 
 export const JobProfile = Class.create({
     name: 'JobProfile',
-    collection: new Mongo.Collection('job_profiles'),
+    collection: new Mongo.Collection('job_profiles', { idGeneration: 'MONGO' }),
     fields: {
-        title: {
+        title: String,
+        description: {
             type: String,
-            validators: [{ type: 'string' }, { type: 'notNull' }]
+            optional: true
         },
-        description: String,
-        baseSalary: Number
+        baseSalary: {
+            type: Number,
+            optional: true
+        }
     }
 });
 
 export const Role = Class.create({
     name: 'Role',
-    collection: new Mongo.Collection('roles'),
+    collection: new Mongo.Collection('roles', { idGeneration: 'MONGO' }),
     fields: {
-        name: {
-            type: String,
-            validators: [{ type: 'notNull' }]
-        },
-        accessIDs: [Mongo.ObjectID]
+        name: String,
+        accessIDs: {
+            type: [Mongo.ObjectID],
+            default: []
+        }
     },
     indexes: {
-        title: { fields: { name: 1 }, options: { unique: true } }
+        name: { fields: { name: 1 }, options: { unique: true } }
     }
 });
 
 export const Access = Class.create({
     name: 'Access',
-    collection: new Mongo.Collection('accesses'),
+    collection: new Mongo.Collection('accesses', { idGeneration: 'MONGO' }),
     fields: {
-        code: {
+        code: String,
+        endpoint: String,
+        description: {
             type: String,
-            validators: [{ type: 'notNull' }]
-        },
-        description: String
+            optional: true
+        }
     },
     indexes: {
-        title: { fields: { code: 1 }, options: { unique: true } }
+        code: { fields: { code: 1 }, options: { unique: true } }
     }
 });
