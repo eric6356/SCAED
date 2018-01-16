@@ -1,26 +1,32 @@
+class Account {
+    constructor(username, firstName, lastName) {
+        this.username = username;
+        this.person = new Person(this, firstName, lastName);
+        this.roles = [];
+    }
+
+    addRole(role) {
+        if (this.roles.indexOf(role) === -1) {
+            this.roles.push(role);
+        }
+    }
+
+    removeRole(role) {
+        const i = this.roles.indexOf(role);
+        if (i >= 0) {
+            this.roles.splice(i, 1);
+        }
+    }
+}
+
 class Person {
-    constructor(firstName, lastName) {
+    constructor(account, firstName, lastName) {
+        this.account = account;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.accounts = [];
         this.jobProfile = null;
         this.manager = null;
         this.contact = null;
-    }
-
-    createAccount(accountName) {
-        const account = new Account(this, accountName);
-        this.addAccount(account);
-    }
-
-    addAccount(account) {
-        const i = this.accounts.push(account);
-    }
-
-    removeAccount(account) {
-        account.person = null; // TODO: delete account
-        this.accounts.indexOf(account);
-        this.accounts.splice(i, 1);
     }
 
     get fullName() {
@@ -45,10 +51,9 @@ class JobProfile {
     }
 }
 
-class Account {
-    constructor(person, name) {
+class Role {
+    constructor(name) {
         this.name = name;
-        this.person = person;
         this.accessMap = {};
     }
 
