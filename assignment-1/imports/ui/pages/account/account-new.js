@@ -1,20 +1,9 @@
-import { Template } from 'meteor/templating';
-import { Accounts } from 'meteor/accounts-base';
+import React from 'react';
 import { Meteor } from 'meteor/meteor';
+import { render } from 'react-dom';
+import { Template } from 'meteor/templating';
 
 import './account-new.html';
+import AccountForm from './AccountForm';
 
-Template.Account_New.events({
-    submit(event) {
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        Accounts.createUser({ username, password }, err => {
-            if (err) {
-                alert(err.message);
-            } else {
-                alert('success');
-            }
-        });
-        return false;
-    }
-});
+Template.Account_New.onRendered(() => render(<AccountForm />, document.getElementById('accountForm')));

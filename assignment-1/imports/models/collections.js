@@ -35,6 +35,19 @@ export const Account = Class.create({
         }
     }
 });
+// Account.createAccount = ({ username, password }) => {
+//     let account = Account.findOne({ username });
+//     if (account) {
+//         return {
+//             msg: 'Username exists.'
+//         };
+//     } else {
+//         account = new Account();
+//         account.username = username;
+//         account.save();
+
+//     }
+// };
 
 export const Person = Class.create({
     name: 'Person',
