@@ -8,8 +8,8 @@ BlazeLayout.setRoot('body');
 // Import needed templates
 import '../../ui/layout/layout.js';
 import '../../ui/pages/home/home.js';
-import '../../ui/pages/account/account.js';
-import '../../ui/pages/access/access.js';
+import '../../ui/pages/account';
+import '../../ui/pages/access';
 import '../../ui/pages/portal/portal.js';
 
 // Set up all routes in the app
@@ -27,8 +27,12 @@ function makePrivateRouter(path, name) {
 }
 
 makePrivateRouter('/', 'home');
-makePrivateRouter('/account', 'account');
-makePrivateRouter('/access', 'access');
+
+makePrivateRouter('/account/list', 'Account_List');
+makePrivateRouter('/account/new', 'Account_New');
+
+makePrivateRouter('/access/list', 'Access_List');
+makePrivateRouter('/access/new', 'Access_New');
 
 FlowRouter.route('/portal', {
     name: 'portal',

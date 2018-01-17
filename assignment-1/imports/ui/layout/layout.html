@@ -3,20 +3,7 @@
     <div class="container-wider">
       <div class="height-100 flex-left">
         <aside class="unit-1-4 flex-vertical scroll-view aside">
-          <ul class="aside-menu-list top-gap-0 unit-0">
-            <li>
-              <a href="{{pathFor 'account'}}" class="{{isActiveRoute 'account'}}">
-                Account
-              </a>
-            </li>
-            <li>
-              <a href="{{pathFor 'access'}}" class="{{isActiveRoute 'access'}}">
-                Access
-              </a>
-            </li>
-            <li>2</li>
-            <li>3</li>
-          </ul>
+          {{#each menuGroup in menuGroups}} {{> Aside_Menu_Group menuGroup}} {{/each}}
           <ul class="aside-menu-list top-gap-0 unit"></ul>
           <ul class="aside-menu-list top-gap-0 unit-0">
             <li>
@@ -42,34 +29,4 @@
       </div>
     </div>
   </div>
-
-  <!-- <div class="container">
-    <div class="sidebar">
-      <div class="pure-menu">
-        <a class="pure-menu-heading" href="{{pathFor 'home'}}">
-          Menu
-        </a>
-        <ul class="pure-menu-list">
-          <li class="pure-menu-item {{isActiveRoute 'account'}}">
-            <a href="{{pathFor 'account'}}" class="pure-menu-link">
-              Account
-            </a>
-          </li>
-          <li class="pure-menu-item {{isActiveRoute 'access'}}">
-            <a href="{{pathFor 'access'}}" class="pure-menu-link">
-              Access
-            </a>
-          </li>
-          <li class="pure-menu-item menu-item-divided">
-            <a href="{{pathFor 'logout'}}" class="pure-menu-link">
-              Logout
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="main">
-                
-    </div> -->
-  <!-- </div> -->
 </template>

@@ -1,0 +1,51 @@
+#!/usr/bin/env node
+const fs = require('fs');
+const path = require('path');
+
+const routeName = process.argv[2];
+const pagePath = path.join(path.dirname(__dirname), 'imports/ui/pages', routeName);
+
+const capName = routeName.charAt(0).toUpperCase() + routeName.slice(1);
+fs.mkdirSync(pagePath);
+
+const getHtml = kw => `<template name="${capName}_${kw}">\n    <h1>${capName} ${kw}</h1>\n</template>\n`;
+const getJS = kw => `import './${routeName}-${kw}.html'\n`;
+
+let filePath;
+// list.html
+filePath = path.join(pagePath, `${routeName}-list.html`);
+console.log(`Generating ${filePath}`);
+fs.writeFileSync(filePath, getHtml('List'));
+
+// list.js
+filePath = path.join(pagePath, `${routeName}-list.js`);
+console.log(`Generating ${filePath}`);
+fs.writeFileSync(filePath, getJS('list'));
+
+// new.html
+filePath = path.join(pagePath, `${routeName}-new.html`);
+console.log(`Generating ${filePath}`);
+fs.writeFileSync(filePath, getHtml('New'));
+
+// new.js
+filePath = path.join(pagePath, `${routeName}-new.js`);
+console.log(`Generating ${filePath}`);
+fs.writeFileSync(filePath, getJS('new'));
+
+// index.js
+filePath = path.join(pagePath, 'index.js');
+console.log(`Generating ${filePath}`);
+fs.writeFileSync(filePath, "import './access-list';\nimport './access-new';\n");
+
+console.log(`\n`);
+console.log('Please add following lines to startup/client/routes.js:');
+console.log(`makePrivateRouter('/${routeName}/list', '${capName}_List');`);
+console.log(`makePrivateRouter('/${routeName}/new', '${capName}_New');\n`);
+console.log('And the following object to `menuGroups` in ui/layout/layout.js:');
+console.log('{');
+console.log(`\ttitle: '${capName}'`);
+console.log(`\tallName: '${capName}_List'`);
+console.log(`\tallText: 'All ${capName}s'`);
+console.log(`\tnewName: '${capName}_New'`);
+console.log(`\tnewText: 'Create ${capName}s'`);
+console.log('}');

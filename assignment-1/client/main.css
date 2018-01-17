@@ -25,6 +25,7 @@
 
 .aside-menu-list,
 .aside-menu-list li {
+    padding-left: 15px;
     list-style: none;
     background-color: #eee;
 }
