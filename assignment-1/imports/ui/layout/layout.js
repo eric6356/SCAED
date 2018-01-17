@@ -18,6 +18,13 @@ Template.App_body.helpers({
             allText: 'All Accesses',
             newName: 'Access_New',
             newText: 'Create Access'
+        },
+        {
+            title: 'Role',
+            allName: 'Role_List',
+            allText: 'All Roles',
+            newName: 'Role_New',
+            newText: 'Create Role'
         }
     ]
 });

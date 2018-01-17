@@ -34,6 +34,9 @@ makePrivateRouter('/account/new', 'Account_New');
 makePrivateRouter('/access/list', 'Access_List');
 makePrivateRouter('/access/new', 'Access_New');
 
+makePrivateRouter('/role/list', 'Role_List');
+makePrivateRouter('/role/new', 'Role_New');
+
 FlowRouter.route('/portal', {
     name: 'portal',
     action() {
