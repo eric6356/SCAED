@@ -8,14 +8,14 @@ const pagePath = path.join(path.dirname(__dirname), 'imports/ui/pages', routeNam
 const capName = routeName.charAt(0).toUpperCase() + routeName.slice(1);
 fs.mkdirSync(pagePath);
 
-const getHtml = kw => `<template name="${capName}_${kw}">\n    <h1>${capName} ${kw}</h1>\n</template>\n`;
+const getHtml = (kw, title) => `<template name="${capName}_${kw}">\n    <h1>${title}</h1>\n</template>\n`;
 const getJS = kw => `import './${routeName}-${kw}.html'\n`;
 
 let filePath;
 // list.html
 filePath = path.join(pagePath, `${routeName}-list.html`);
 console.log(`Generating ${filePath}`);
-fs.writeFileSync(filePath, getHtml('List'));
+fs.writeFileSync(filePath, getHtml('List', `All ${capName}s`));
 
 // list.js
 filePath = path.join(pagePath, `${routeName}-list.js`);
@@ -25,7 +25,7 @@ fs.writeFileSync(filePath, getJS('list'));
 // new.html
 filePath = path.join(pagePath, `${routeName}-new.html`);
 console.log(`Generating ${filePath}`);
-fs.writeFileSync(filePath, getHtml('New'));
+fs.writeFileSync(filePath, getHtml('New', `Create ${capName}`));
 
 // new.js
 filePath = path.join(pagePath, `${routeName}-new.js`);

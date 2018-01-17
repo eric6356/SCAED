@@ -1,0 +1,19 @@
+<template name="Account_Table">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Person</th>
+                <th>Roles</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{# each account in accountList}} {{> Account_Table_Row account=account}} {{/each}}
+        </tbody>
+    </table>
+    <a href="{{pathFor 'Account_New'}}" class="btn btn-block">
+        <i class="fas fa-plus"></i>
+        <span>Create Account</span>
+    </a>
+</template>

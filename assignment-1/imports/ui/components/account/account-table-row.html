@@ -1,0 +1,11 @@
+<template name='Account_Table_Row'>
+    <tr>
+        <td>{{account._id}}</td>
+        <td>{{account.username}}</td>
+        <td>{{account.profile.getPerson}}</td>
+        <td>
+            {{#each role in account.profile.getRoles}}
+            <code>{{role.name}}</code> {{/each}}
+        </td>
+    </tr>
+</template>

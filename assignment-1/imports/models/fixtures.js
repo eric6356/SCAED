@@ -13,6 +13,7 @@ export const initFixture = () => {
             description: 'all access'
         });
         allAccess.save();
+        console.log('[Access: all] created');
     }
 
     let adminRole = c.Role.findOne({ name: 'admin' });
@@ -23,17 +24,18 @@ export const initFixture = () => {
             accessIDs: [allAccess._id]
         });
         adminRole.save();
+        console.log('[Rold: admin] created');
     }
 
     let adminAccount = c.Account.findOne({ username: 'admin' });
     if (adminAccount === undefined) {
-        adminAccount = new c.Account();
-        adminAccount.set({
+        adminAccount = Accounts.createUser({
             username: 'admin',
-            roleIDs: [adminRole._id]
+            password: 'admin',
+            profile: {
+                roleIDs: [adminRole._id]
+            }
         });
-        adminAccount.save();
-
-        Accounts.setPassword(adminAccount._id, 'admin');
+        console.log('[Account: admin] created');
     }
 };

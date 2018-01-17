@@ -2,18 +2,36 @@ import { Mongo } from 'meteor/mongo';
 import { Class } from 'meteor/jagi:astronomy';
 import { Meteor } from 'meteor/meteor';
 
-export const Account = Class.create({
-    name: 'Account',
-    collection: Meteor.users,
+export const AccountProfile = Class.create({
+    name: 'AccountProfile',
     fields: {
         personID: {
             type: Mongo.ObjectID,
             optional: true
         },
-        username: String,
         roleIDs: {
             type: [Mongo.ObjectID],
             default: []
+        }
+    },
+    helpers: {
+        getPerson() {
+            return this.personID && Person.findOne(this.personID);
+        },
+        getRoles() {
+            return this.roleIDs && Role.find({ _id: { $in: this.roleIDs } });
+        }
+    }
+});
+
+export const Account = Class.create({
+    name: 'Account',
+    collection: Meteor.users,
+    fields: {
+        username: String,
+        profile: {
+            type: AccountProfile,
+            optional: true
         }
     }
 });
@@ -31,7 +49,10 @@ export const Person = Class.create({
             validators: [{ type: 'string' }]
         },
         accountID: String,
-        jobProfileID: Mongo.ObjectID,
+        jobProfileID: {
+            type: Mongo.ObjectID,
+            optional: true
+        },
         managerID: {
             type: String,
             optional: true
