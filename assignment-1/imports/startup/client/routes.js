@@ -30,12 +30,15 @@ makePrivateRouter('/', 'home');
 
 makePrivateRouter('/account/list', 'Account_List');
 makePrivateRouter('/account/new', 'Account_New');
+makePrivateRouter('/account/:_id', 'Account_Modify');
 
 makePrivateRouter('/access/list', 'Access_List');
 makePrivateRouter('/access/new', 'Access_New');
+makePrivateRouter('/access/:_id', 'Access_Modify');
 
 makePrivateRouter('/role/list', 'Role_List');
 makePrivateRouter('/role/new', 'Role_New');
+makePrivateRouter('/rold/:_id', 'Role_Modify');
 
 FlowRouter.route('/portal', {
     name: 'portal',

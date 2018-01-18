@@ -1,0 +1,12 @@
+<template name="Access_Table_Row">
+    <tr>
+        <td>{{access.code}}</td>
+        <td>{{access.endpoint}}</td>
+        <td>{{access.description}}</td>
+        <td>
+            <a href="{{pathFor 'Access_Modify' _id=access._id._str}}" class="btn btn-primary text-small top-gap-0">
+                <i class="fas fa-edit"></i>
+            </a>
+        </td>
+    </tr>
+</template>

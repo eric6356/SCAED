@@ -7,5 +7,10 @@
             {{#each role in account.profile.getRoles}}
             <code>{{role.name}}</code> {{/each}}
         </td>
+        <td>
+            <a href="{{pathFor 'Account_Modify' _id=account._id}}" class="btn btn-primary text-small top-gap-0">
+                <i class="fas fa-edit"></i>
+            </a>
+        </td>
     </tr>
 </template>

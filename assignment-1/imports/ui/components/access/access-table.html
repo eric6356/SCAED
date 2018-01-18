@@ -1,0 +1,19 @@
+<template name="Access_Table">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Endpoint</th>
+                <th>Description</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each access in accessList}} {{> Access_Table_Row access=access}} {{/each}}
+        </tbody>
+    </table>
+    <a href="{{pathFor 'Access_New'}}" class="btn btn-block">
+        <i class="fas fa-plus"></i>
+        <span>Create Access</span>
+    </a>
+</template>

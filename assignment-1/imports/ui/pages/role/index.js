@@ -1,2 +1,3 @@
-import './access-list';
-import './access-new';
+import './role-list';
+import './role-new';
+import './role-modify';
