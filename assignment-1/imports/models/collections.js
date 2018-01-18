@@ -19,7 +19,7 @@ export const AccountProfile = Class.create({
             return this.personID && Person.findOne(this.personID);
         },
         getRoles() {
-            return this.roleIDs && Role.find({ _id: { $in: this.roleIDs } });
+            return this.roleIDs ? Role.find({ _id: { $in: this.roleIDs } }) : [];
         }
     }
 });
@@ -128,6 +128,11 @@ export const Role = Class.create({
     },
     indexes: {
         name: { fields: { name: 1 }, options: { unique: true } }
+    },
+    helpers: {
+        getAccesses() {
+            return this.accessIDs ? Access.find({ _id: { $in: this.accessIDs } }) : [];
+        }
     }
 });
 

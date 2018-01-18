@@ -10,6 +10,7 @@ import '../../ui/layout/layout.js';
 import '../../ui/pages/home/home.js';
 import '../../ui/pages/account';
 import '../../ui/pages/access';
+import '../../ui/pages/role';
 import '../../ui/pages/portal/portal.js';
 
 // Set up all routes in the app

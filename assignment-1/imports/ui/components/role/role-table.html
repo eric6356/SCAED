@@ -1,0 +1,18 @@
+<template name="Role_Table">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Access</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each role in roleList}} {{> Role_Table_Row role=role}} {{/each}}
+        </tbody>
+    </table>
+    <a href="{{pathFor 'Role_New'}}" class="btn btn-block">
+        <i class="fas fa-plus"></i>
+        <span>Create Role</span>
+    </a>
+</template>
