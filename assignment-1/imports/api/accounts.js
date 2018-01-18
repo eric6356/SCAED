@@ -18,8 +18,6 @@ Meteor.methods({
     },
     'account.modify'({ _id, params }) {
         if (Meteor.isServer) {
-            console.log(_id);
-            console.log(params);
             const account = c.Account.findOne(_id);
             if (!account) {
                 throw new Meteor.Error(404);
