@@ -25,6 +25,27 @@ Template.App_body.helpers({
             allText: 'All Roles',
             newName: 'Role_New',
             newText: 'Create Role'
+        },
+        {
+            title: 'Contact',
+            allName: 'Contact_List',
+            allText: 'All Contacts',
+            newName: 'Contact_New',
+            newText: 'Create Contact'
+        },
+        {
+            title: 'Person',
+            allName: 'Person_List',
+            allText: 'All People',
+            newName: 'Person_New',
+            newText: 'Create Person'
+        },
+        {
+            title: 'Job Profile',
+            allName: 'JobProfile_List',
+            allText: 'All Job Profiles',
+            newName: 'JobProfile_New',
+            newText: 'Create Job Profile'
         }
     ]
 });

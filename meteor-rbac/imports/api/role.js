@@ -21,8 +21,7 @@ Meteor.methods({
                 throw new Meteor.Error(404);
             }
             const { name, accessIDs } = params;
-            accessIds = toMongo(accessIDs);
-            role.set({ name, accessIDs });
+            role.set({ name, accessIDs: toMongo(accessIDs) });
             return role.save();
         }
     }

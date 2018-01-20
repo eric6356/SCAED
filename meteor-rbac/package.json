@@ -1,5 +1,5 @@
 {
-    "name": "assignment-1",
+    "name": "meteor-rbac",
     "private": true,
     "scripts": {
         "start": "MONGO_URL=mongodb://localhost:27017/meteor meteor run",
@@ -12,6 +12,7 @@
         "meteor-node-stubs": "^0.3.2",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
-        "react-router-dom": "^4.2.2"
+        "react-router-dom": "^4.2.2",
+        "simpl-schema": "^1.4.1"
     }
 }
