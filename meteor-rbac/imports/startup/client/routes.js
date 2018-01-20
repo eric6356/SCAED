@@ -42,9 +42,9 @@ makePrivateRouter('/role/new', 'Role_New');
 makePrivateRouter('/rold/:_id', 'Role_Modify');
 
 FlowRouter.route('/portal', {
-    name: 'portal',
+    name: 'Portal',
     action() {
-        BlazeLayout.render('App_body', { main: 'portal' });
+        BlazeLayout.render('App_body', { main: 'Portal' });
     }
 });
 
