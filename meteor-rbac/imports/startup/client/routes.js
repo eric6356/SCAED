@@ -6,12 +6,12 @@ import { ActiveRoute } from 'meteor/zimme:active-route';
 BlazeLayout.setRoot('body');
 
 // Import needed templates
-import '../../ui/layout/layout.js';
+import '../../ui/layout';
 import '../../ui/pages/home/home.js';
 import '../../ui/pages/account';
 import '../../ui/pages/access';
 import '../../ui/pages/role';
-import '../../ui/pages/portal/portal.js';
+import '../../ui/pages/portal';
 
 // Set up all routes in the app
 function makePrivateRouter(path, name) {

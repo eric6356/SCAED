@@ -20,6 +20,9 @@ export default class PortalForm extends React.Component {
                 this.setState({ loggingIn: true });
                 Meteor.loginWithPassword({ username: values.username }, values.password, err => {
                     this.setState({ loggingIn: false });
+                    if (!err) {
+                        return;
+                    }
                     const fieldName = err.reason == 'User not found' ? 'username' : 'password';
                     this.props.form.setFields({
                         [fieldName]: {

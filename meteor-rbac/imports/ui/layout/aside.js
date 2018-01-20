@@ -1,9 +1,11 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
-import './layout.html';
+import './aside.html';
 import '../components/aside-menu-group';
 
-Template.App_body.helpers({
+Template.Aside.helpers({
+    loggedIn: () => Meteor.user() != null,
     menuGroups: () => [
         {
             title: 'Account',

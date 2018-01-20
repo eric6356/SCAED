@@ -2,17 +2,7 @@
   <div class="aside-wrapper flex-center">
     <div class="container-wider">
       <div class="height-100 flex-left">
-        <aside class="unit-1-4 flex-vertical scroll-view aside">
-          {{#each menuGroup in menuGroups}} {{> Aside_Menu_Group menuGroup}} {{/each}}
-          <ul class="aside-menu-list top-gap-0 unit"></ul>
-          <ul class="aside-menu-list top-gap-0 unit-0">
-            <li>
-              <a href="{{pathFor 'logout'}}">
-                Logout
-              </a>
-            </li>
-          </ul>
-        </aside>
+        {{> Aside}}
       </div>
     </div>
   </div>
