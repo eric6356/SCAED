@@ -1,9 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
-import { Form, Icon, Input, Button, Spin } from 'antd';
+import { Form, Icon, Input, Button, Spin, Card } from 'antd';
 const FormItem = Form.Item;
-
-import './index.css';
 
 export default class PortalForm extends React.Component {
     constructor() {
@@ -19,10 +17,10 @@ export default class PortalForm extends React.Component {
             if (!err) {
                 this.setState({ loggingIn: true });
                 Meteor.loginWithPassword({ username: values.username }, values.password, err => {
-                    this.setState({ loggingIn: false });
                     if (!err) {
                         return;
                     }
+                    this.setState({ loggingIn: false });
                     const fieldName = err.reason == 'User not found' ? 'username' : 'password';
                     this.props.form.setFields({
                         [fieldName]: {
@@ -39,8 +37,8 @@ export default class PortalForm extends React.Component {
         const { getFieldDecorator } = this.props.form;
         return (
             <Spin tip="Logging in..." spinning={this.state.loggingIn}>
-                <div className="form-wrapper">
-                    <Form onSubmit={this.handleSubmit} className="login-form">
+                <Card title="Login" style={{ maxWidth: '300px', margin: '100px auto' }}>
+                    <Form onSubmit={this.handleSubmit}>
                         <FormItem>
                             {getFieldDecorator('username', {
                                 rules: [{ required: true, message: 'Please input your username!' }]
@@ -63,12 +61,12 @@ export default class PortalForm extends React.Component {
                             )}
                         </FormItem>
                         <FormItem>
-                            <Button type="primary" htmlType="submit" className="login-form-button">
+                            <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
                                 Log in
                             </Button>
                         </FormItem>
                     </Form>
-                </div>
+                </Card>
             </Spin>
         );
     }

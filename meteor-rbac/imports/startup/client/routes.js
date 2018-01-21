@@ -1,25 +1,18 @@
+import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { BlazeLayout } from 'meteor/kadira:blaze-layout';
-import { ActiveRoute } from 'meteor/zimme:active-route';
+import { mount } from 'react-mounter';
 
-BlazeLayout.setRoot('body');
+import LayoutContainer from '../../ui/Layout';
+import Home from '../../ui/Home';
+import Portal from '../../ui/Portal';
 
-// Import needed templates
-import '../../ui/layout';
-import '../../ui/pages/home/home.js';
-import '../../ui/pages/account';
-import '../../ui/pages/access';
-import '../../ui/pages/role';
-import '../../ui/pages/portal';
-
-// Set up all routes in the app
-function makePrivateRouter(path, name) {
+function makePrivateRouter(path, name, container) {
     FlowRouter.route(path, {
         name,
         triggersEnter: function(context, redirect) {
             if (Meteor.user()) {
-                BlazeLayout.render('App_body', { main: name });
+                mount(LayoutContainer, { main: container });
             } else {
                 redirect(`/portal?next=${encodeURIComponent(path)}`);
             }
@@ -27,36 +20,14 @@ function makePrivateRouter(path, name) {
     });
 }
 
-makePrivateRouter('/', 'home');
-
-makePrivateRouter('/account/list', 'Account_List');
-makePrivateRouter('/account/new', 'Account_New');
-makePrivateRouter('/account/:_id', 'Account_Modify');
-
-makePrivateRouter('/access/list', 'Access_List');
-makePrivateRouter('/access/new', 'Access_New');
-makePrivateRouter('/access/:_id', 'Access_Modify');
-
-makePrivateRouter('/role/list', 'Role_List');
-makePrivateRouter('/role/new', 'Role_New');
-makePrivateRouter('/rold/:_id', 'Role_Modify');
+makePrivateRouter('/', 'Home', <Home />);
 
 FlowRouter.route('/portal', {
     name: 'Portal',
-    action() {
-        BlazeLayout.render('App_body', { main: 'Portal' });
-    }
+    action: () => mount(Portal)
 });
 
 FlowRouter.route('/logout', {
-    name: 'logout',
-    action() {
-        Meteor.logout(() => FlowRouter.go('/portal'));
-    }
+    name: 'Logout',
+    action: () => Meteor.logout(() => FlowRouter.go('/portal'))
 });
-
-// FlowRouter.notFound = {
-//     action() {
-//         BlazeLayout.render('App_body', { main: 'App_notFound' });
-//     }
-// };
