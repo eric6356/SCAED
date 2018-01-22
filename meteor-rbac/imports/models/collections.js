@@ -2,12 +2,43 @@ import { Mongo } from 'meteor/mongo';
 import { Class } from 'meteor/jagi:astronomy';
 import { Meteor } from 'meteor/meteor';
 
+const Person = Class.create({
+    name: 'Person',
+    fields: {
+        firstName: {
+            type: String,
+            validators: [{ type: 'string' }],
+            optional: true
+        },
+        lastName: {
+            type: String,
+            validators: [{ type: 'string' }],
+            optional: true
+        },
+        jobProfileID: {
+            type: Mongo.ObjectID,
+            optional: true
+        },
+        managerID: {
+            type: String,
+            optional: true
+        },
+        contactID: {
+            type: Mongo.ObjectID,
+            optional: true
+        }
+    },
+    helpers: {
+        getFullName: () => `${this.firstName} ${this.lastName}`
+    }
+});
+
 export const AccountProfile = Class.create({
     name: 'AccountProfile',
     fields: {
-        personID: {
-            type: Mongo.ObjectID,
-            optional: true
+        person: {
+            type: Person,
+            default: () => new Person()
         },
         roleIDs: {
             type: [Mongo.ObjectID],
@@ -48,39 +79,6 @@ export const Account = Class.create({
 
 //     }
 // };
-
-export const Person = Class.create({
-    name: 'Person',
-    collection: new Mongo.Collection('people', { idGeneration: 'MONGO' }),
-    fields: {
-        firstName: {
-            type: String,
-            validators: [{ type: 'string' }],
-            optional: true
-        },
-        lastName: {
-            type: String,
-            validators: [{ type: 'string' }],
-            optional: true
-        },
-        accountID: String,
-        jobProfileID: {
-            type: Mongo.ObjectID,
-            optional: true
-        },
-        managerID: {
-            type: String,
-            optional: true
-        },
-        contactID: {
-            type: Mongo.ObjectID,
-            optional: true
-        }
-    },
-    helpers: {
-        getFullName: () => `${this.firstName} ${this.lastName}`
-    }
-});
 
 export const Contact = Class.create({
     name: 'Contact',

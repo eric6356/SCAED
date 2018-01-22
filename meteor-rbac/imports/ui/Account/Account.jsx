@@ -2,8 +2,7 @@ import React from 'react';
 import { Row, Col } from 'antd';
 
 import AccountTable from './AccountTable';
-// import AccountModal from './AccountModal';
-const AccountModal = () => <div>AccountModal</div>;
+import AccountModal from './AccountModal';
 
 export default (Account = props => {
     return (

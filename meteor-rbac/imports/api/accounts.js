@@ -14,12 +14,11 @@ Meteor.methods({
         if (Meteor.isServer) {
             profile.roleIDs = ensureMongo(profile.roleIDs);
             const account = Accounts.createUser({ username, password, profile });
-            if (!account.profile.personID) {
-                const person = new Person();
-                person.accountID = account._id;
-                person.save();
-                account.personID = person._id;
-            }
+            const person = new Person();
+            person.accountID = account._id;
+            person.save();
+            account.personID = person._id;
+            account.save();
             return account;
         }
     },
