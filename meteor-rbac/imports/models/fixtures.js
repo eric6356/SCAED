@@ -36,6 +36,11 @@ export const initFixture = () => {
                 roleIDs: [adminRole._id]
             }
         });
+        const person = c.Person();
+        person.accountID = adminAccount._id;
+        person.save();
+        adminAccount.personID = person._id;
+        adminAccount.save();
         console.log('[Account: admin] created');
     }
 };

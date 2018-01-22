@@ -55,11 +55,13 @@ export const Person = Class.create({
     fields: {
         firstName: {
             type: String,
-            validators: [{ type: 'string' }]
+            validators: [{ type: 'string' }],
+            optional: true
         },
         lastName: {
             type: String,
-            validators: [{ type: 'string' }]
+            validators: [{ type: 'string' }],
+            optional: true
         },
         accountID: String,
         jobProfileID: {

@@ -13,7 +13,14 @@ Meteor.methods({
         // TODO: figure the best practice
         if (Meteor.isServer) {
             profile.roleIDs = ensureMongo(profile.roleIDs);
-            return Accounts.createUser({ username, password, profile });
+            const account = Accounts.createUser({ username, password, profile });
+            if (!account.profile.personID) {
+                const person = new Person();
+                person.accountID = account._id;
+                person.save();
+                account.personID = person._id;
+            }
+            return account;
         }
     },
     'account.modify'({ _id, params }) {
