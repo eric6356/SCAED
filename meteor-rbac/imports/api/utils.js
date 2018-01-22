@@ -14,8 +14,4 @@ export const ensureString = ids =>
         }
     });
 
-<<<<<<< HEAD
 export const getStringID = item => (typeof item._id === 'string' ? item._id : item._id._str);
-=======
-export const getStringID = item => (item._id instanceof String ? item._id : item._id._str);
->>>>>>> 79bafd0574bf853bb6a14de3c8567e9714892234

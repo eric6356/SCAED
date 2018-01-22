@@ -34,14 +34,8 @@ class RoleFormComponent extends Component {
                     this.setState({ isSubmitting: false });
                     if (!err) {
                         this.props.form.setFields({
-<<<<<<< HEAD
                             name: { value: '' },
                             accessIDs: { value: [] }
-=======
-                            code: { value: '' },
-                            endpoint: { value: '' },
-                            description: { value: '' }
->>>>>>> 79bafd0574bf853bb6a14de3c8567e9714892234
                         });
                         notification.success({
                             message: 'Created!',
