@@ -95,7 +95,12 @@ export class EditableTable extends React.Component {
         const newData = [...this.state.data];
         const target = newData.filter(one => one.key === key)[0];
         if (target) {
-            target.item[column] = value;
+            let item = target.item;
+            const keys = column.split('.');
+            keys.slice(0, -1).map(key => {
+                item = item[key];
+            });
+            item[keys.slice(-1)[0]] = value;
             this.setState({ data: newData });
         }
     }
