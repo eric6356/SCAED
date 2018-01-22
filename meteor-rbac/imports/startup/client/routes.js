@@ -6,6 +6,7 @@ import { mount } from 'react-mounter';
 import LayoutContainer from '../../ui/Layout';
 import Home from '../../ui/Home';
 import Portal from '../../ui/Portal';
+import Access from '../../ui/Access';
 
 function makePrivateRouter(path, name, container) {
     FlowRouter.route(path, {
@@ -21,6 +22,7 @@ function makePrivateRouter(path, name, container) {
 }
 
 makePrivateRouter('/', 'Home', <Home />);
+makePrivateRouter('/rbac/access', 'Access', <Access />);
 
 FlowRouter.route('/portal', {
     name: 'Portal',

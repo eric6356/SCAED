@@ -8,11 +8,9 @@ const { Content, Sider, Header } = AntdLayout;
 const Layout = ({ main, menus, user }) => (
     <AntdLayout>
         <Sider style={{ paddingTop: '16px' }} style={{ minHeight: '100vh' }}>
-            {menus.map((one, i) => (
-                <Menu key={i} theme="dark" onClick={({ key }) => FlowRouter.go(key)}>
-                    <Menu.Item key={one.name}>{one.name}</Menu.Item>
-                </Menu>
-            ))}
+            <Menu theme="dark" onClick={({ key }) => FlowRouter.go(key)}>
+                {menus.map(one => <Menu.Item key={one}>{one}</Menu.Item>)}
+            </Menu>
         </Sider>
         <AntdLayout>
             {user && (
@@ -20,7 +18,7 @@ const Layout = ({ main, menus, user }) => (
                     <a onClick={() => FlowRouter.go('/logout')}>Logout</a>
                 </Header>
             )}
-            <Content>{main}</Content>
+            <Content style={{ margin: '20px' }}>{main}</Content>
         </AntdLayout>
     </AntdLayout>
 );

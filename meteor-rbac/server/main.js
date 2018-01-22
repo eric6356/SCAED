@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 
 import '../imports/api';
 import { initFixture } from '../imports/models/fixtures';
-// import * as c from '../imports/models/collections';
+import * as c from '../imports/models/collections';
 
 Meteor.startup(() => {
     // code to run on server at startup
