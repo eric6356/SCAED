@@ -1,6 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 
-export const toMongo = ids =>
+export const ensureMongo = ids =>
     ids.map(id => (id instanceof Mongo.ObjectID ? id : new Mongo.ObjectID(id)));
 
 export const ensureString = ids =>
@@ -13,3 +13,5 @@ export const ensureString = ids =>
             throw new Error('unknow id type');
         }
     });
+
+export const getStringID = item => (item._id instanceof String ? item._id : item._id._str);

@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 
 import * as c from '../models/collections';
-import { toMongo } from './utils';
+import { ensureMongo } from './utils';
 
 Meteor.methods({
     'account.remove'(accountID) {
@@ -12,7 +12,7 @@ Meteor.methods({
     'account.create'({ username, password, profile }) {
         // TODO: figure the best practice
         if (Meteor.isServer) {
-            profile.roleIDs = toMongo(profile.roleIDs);
+            profile.roleIDs = ensureMongo(profile.roleIDs);
             return Accounts.createUser({ username, password, profile });
         }
     },
@@ -26,7 +26,7 @@ Meteor.methods({
             if (password) {
                 Accounts.setPassword(account._id, password);
             }
-            profile.roleIDs = toMongo(profile.roleIDs);
+            profile.roleIDs = ensureMongo(profile.roleIDs);
             account.set({ username, profile });
             return account.save();
         }

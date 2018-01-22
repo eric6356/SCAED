@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 
-import { toMongo } from './utils';
+import { ensureMongo } from './utils';
 import * as c from '../models/collections';
 
 Meteor.methods({
@@ -8,7 +8,7 @@ Meteor.methods({
         if (Meteor.isServer) {
             // TODO: validation
             const role = new c.Role();
-            accessIDs = toMongo(accessIDs);
+            accessIDs = ensureMongo(accessIDs);
             role.set({ name, accessIDs });
             return role.save();
         }
@@ -21,7 +21,7 @@ Meteor.methods({
                 throw new Meteor.Error(404);
             }
             const { name, accessIDs } = params;
-            role.set({ name, accessIDs: toMongo(accessIDs) });
+            role.set({ name, accessIDs: ensureMongo(accessIDs) });
             return role.save();
         }
     }
