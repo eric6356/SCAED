@@ -12,7 +12,7 @@ export default (Role = props => {
                     <h1>Manage Role</h1>
                 </Col>
                 <Col>
-                    <RoleModal />
+                    <RoleModal {...props} />
                 </Col>
             </Row>
 

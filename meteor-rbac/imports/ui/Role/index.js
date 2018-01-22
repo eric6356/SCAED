@@ -2,10 +2,10 @@ import React from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Spin } from 'antd';
 
-import Access from './Role.jsx';
+import Role from './Role.jsx';
 import * as c from '../../models/collections';
 
-export default (AccessContainer = withTracker(props => {
+export default (RoleContainer = withTracker(props => {
     const accessHandle = Meteor.subscribe('access.all');
     const roleHandle = Meteor.subscribe('role.all');
     const loading = !roleHandle.ready() && !accessHandle.ready();

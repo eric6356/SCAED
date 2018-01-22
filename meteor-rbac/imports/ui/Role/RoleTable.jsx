@@ -37,6 +37,7 @@ const RoleTable = props => (
                 } else {
                     notification.error({ message: 'Failed!', description: err.reason });
                 }
+                cb(err);
             })
         }
     />
