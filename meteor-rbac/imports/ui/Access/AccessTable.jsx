@@ -1,7 +1,7 @@
 import React from 'react';
 import { notification } from 'antd';
 
-import EditableTable from '../EditableTable';
+import { EditableTable } from '../EditableTable';
 
 const AccessTable = props => (
     <EditableTable

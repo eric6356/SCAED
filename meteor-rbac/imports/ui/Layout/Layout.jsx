@@ -14,7 +14,15 @@ const Layout = ({ main, menus, user }) => (
         </Sider>
         <AntdLayout>
             {user && (
-                <Header style={{ backgroundColor: 'white', height: '20px', lineHeight: '20px', textAlign: 'right' }}>
+                <Header
+                    style={{
+                        backgroundColor: 'white',
+                        height: '20px',
+                        lineHeight: '20px',
+                        textAlign: 'right',
+                        paddingRight: '20px'
+                    }}
+                >
                     <a onClick={() => FlowRouter.go('/logout')}>Logout</a>
                 </Header>
             )}

@@ -7,6 +7,7 @@ import LayoutContainer from '../../ui/Layout';
 import Home from '../../ui/Home';
 import Portal from '../../ui/Portal';
 import Access from '../../ui/Access';
+import Role from '../../ui/Role';
 
 function makePrivateRouter(path, name, container) {
     FlowRouter.route(path, {
@@ -23,6 +24,7 @@ function makePrivateRouter(path, name, container) {
 
 makePrivateRouter('/', 'Home', <Home />);
 makePrivateRouter('/rbac/access', 'Access', <Access />);
+makePrivateRouter('/rbac/role', 'Role', <Role />);
 
 FlowRouter.route('/portal', {
     name: 'Portal',

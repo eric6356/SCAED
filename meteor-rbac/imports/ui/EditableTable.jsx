@@ -1,7 +1,10 @@
 import React from 'react';
-import { Table, Input, Popconfirm } from 'antd';
+import { Table, Input, Popconfirm, Select } from 'antd';
+const Option = Select.Option;
 
-const EditableCell = ({ editable, value, onChange }) => (
+const getKey = item => (item._id instanceof String ? item._id : item._id._str);
+
+export const EditableCell = ({ editable, value, onChange }) => (
     <div>
         {editable ? (
             <Input
@@ -15,7 +18,19 @@ const EditableCell = ({ editable, value, onChange }) => (
     </div>
 );
 
-export default class EditableTable extends React.Component {
+export const EditableMultipleOptionCell = ({ editable, value, onChange, options, displayKey }) => (
+    <Select
+        mode="multiple"
+        style={{ width: '100%' }}
+        disabled={!editable}
+        value={value}
+        onChange={newValue => onChange(newValue)}
+    >
+        {options.map(option => <Option key={getKey(option)}>{option[displayKey]}</Option>)}
+    </Select>
+);
+
+export class EditableTable extends React.Component {
     constructor(props) {
         super(props);
         this.columns = props.columns.map(column => ({
@@ -39,7 +54,6 @@ export default class EditableTable extends React.Component {
     }
 
     getDataFromItems(items) {
-        const getKey = item => (item._id instanceof String ? item._id : item._id._str);
         return items.map(item => ({ key: getKey(item), editable: false, item, copy: { ...item } }));
     }
 
