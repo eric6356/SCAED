@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import wildcard from 'wildcard';
 
 import { ensureMongo } from './utils';
 import * as c from '../models/collections';
@@ -23,6 +24,29 @@ Meteor.methods({
             const { name, accessIDs } = params;
             role.set({ name, accessIDs: ensureMongo(accessIDs) });
             return role.save();
+        }
+    },
+    'role.canAccess'({ _id, path }) {
+        if (Meteor.isServer) {
+            const account = Meteor.user();
+            let roleExists = false;
+            for (let roleID of account.profile.roleIDs) {
+                if (roleID.equals(_id)) {
+                    roleExists = true;
+                    break;
+                }
+            }
+            if (!roleExists) {
+                return false;
+            }
+
+            let canAccess = false;
+            c.Role.findOne(_id)
+                .getAccesses()
+                .forEach(access => {
+                    canAccess = canAccess || !!wildcard(access.endpoint, path);
+                });
+            return canAccess;
         }
     }
 });

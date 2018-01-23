@@ -1,5 +1,5 @@
 import React from 'react';
-import { notification } from 'antd';
+import { message } from 'antd';
 
 import { ensureString } from '../../api/utils';
 import { EditableTable, EditableCell, EditableMultipleOptionCell } from '../EditableTable';
@@ -33,9 +33,9 @@ const RoleTable = props => (
         onSave={(role, cb) =>
             Meteor.call('role.modify', { _id: role._id, params: role }, err => {
                 if (!err) {
-                    notification.success({ message: 'Success!', description: 'Role saved.' });
+                    message.success('Role saved!');
                 } else {
-                    notification.error({ message: 'Failed!', description: err.reason });
+                    message.error(err.reason);
                 }
                 cb(err);
             })

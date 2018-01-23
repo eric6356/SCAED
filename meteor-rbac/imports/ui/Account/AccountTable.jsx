@@ -1,5 +1,5 @@
 import React from 'react';
-import { notification } from 'antd';
+import { message } from 'antd';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import { ensureString } from '../../api/utils';
@@ -45,9 +45,9 @@ const AccountTable = props => (
         onSave={(account, cb) =>
             Meteor.call('account.modify', { _id: account._id, params: account }, err => {
                 if (!err) {
-                    notification.success({ message: 'Success!', description: 'Account saved.' });
+                    message.success('Account saved');
                 } else {
-                    notification.error({ message: 'Failed!', description: err.reason });
+                    message.error(err.reason);
                 }
                 cb(err);
             })

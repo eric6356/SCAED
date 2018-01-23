@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Button, Icon, Form, Input, notification, Select } from 'antd';
+import { Modal, Button, Icon, Form, Input, message, Select } from 'antd';
 const Option = Select.Option;
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -43,15 +43,9 @@ class AccountFormComponent extends Component {
                             password: { value: '' },
                             roleIDs: { value: [] }
                         });
-                        notification.success({
-                            message: 'Created!',
-                            description: 'Account created.'
-                        });
+                        message.success('Account created.');
                     } else {
-                        notification.error({
-                            message: 'Failed!',
-                            description: err.reason
-                        });
+                        message.error(err.reason);
                     }
                 });
             }

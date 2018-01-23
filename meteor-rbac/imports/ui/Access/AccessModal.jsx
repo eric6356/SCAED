@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Button, Icon, Form, Input, notification } from 'antd';
+import { Modal, Button, Icon, Form, Input, message } from 'antd';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -36,15 +36,9 @@ class AccessFormComponent extends Component {
                             endpoint: { value: '' },
                             description: { value: '' }
                         });
-                        notification.success({
-                            message: 'Created!',
-                            description: 'Access created.'
-                        });
+                        message.success('Access created.');
                     } else {
-                        notification.error({
-                            message: 'Failed',
-                            description: err.reason
-                        });
+                        message.error(err.reason);
                     }
                 });
             }

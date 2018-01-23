@@ -14,7 +14,7 @@ export default (ProfileContainer = withTracker(props => {
     const account = c.Account.findOne(id);
     return {
         account,
-        contact: account.getContact(),
-        jobProfile: account.getJobProfile()
+        contact: account && account.getContact(),
+        jobProfile: account && account.getJobProfile()
     };
 })(props => <Profile {...props} />));

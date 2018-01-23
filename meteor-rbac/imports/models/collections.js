@@ -129,7 +129,7 @@ export const Role = Class.create({
     },
     helpers: {
         getAccesses() {
-            return this.accessIDs ? Access.find({ _id: { $in: this.accessIDs } }) : [];
+            return Access.find({ _id: { $in: this.accessIDs } });
         }
     }
 });

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Button, notification } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 const FormItem = Form.Item;
 
 const formItemLayout = {
@@ -31,12 +31,9 @@ class ProfileFormComponent extends Component {
                     err => {
                         if (!err) {
                             this.setState({ editing: false });
-                            notification.success({
-                                message: 'Saved!',
-                                description: 'Profile saved.'
-                            });
+                            message.success('Profile saved.');
                         } else {
-                            notification.error({ message: 'Failed!', description: err.reason });
+                            message.error(err.reason);
                         }
                     }
                 );
@@ -51,7 +48,7 @@ class ProfileFormComponent extends Component {
             <Form onSubmit={e => this.handleSubmit(e)}>
                 <FormItem {...formItemLayout} label="First Name">
                     {getFieldDecorator('firstName', {
-                        initialValue: account.profile.person.firstName,
+                        initialValue: account && account.profile.person.firstName,
                         rules: [
                             {
                                 required: true,
@@ -62,7 +59,7 @@ class ProfileFormComponent extends Component {
                 </FormItem>
                 <FormItem {...formItemLayout} label="Last Name">
                     {getFieldDecorator('lastName', {
-                        initialValue: account.profile.person.lastName,
+                        initialValue: account && account.profile.person.lastName,
                         rules: [
                             {
                                 required: true,

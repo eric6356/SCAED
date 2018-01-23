@@ -1,5 +1,5 @@
 import React from 'react';
-import { notification } from 'antd';
+import { message } from 'antd';
 
 import { EditableTable } from '../EditableTable';
 
@@ -14,9 +14,9 @@ const AccessTable = props => (
         onSave={(access, cb) =>
             Meteor.call('access.modify', { _id: access._id, params: access }, err => {
                 if (!err) {
-                    notification.success({ message: 'Success!', description: 'Access saved.' });
+                    message.success('Access saved!');
                 } else {
-                    notification.error({ message: 'Failed!', description: err.reason });
+                    message.error(err.reason);
                 }
                 cb(err);
             })

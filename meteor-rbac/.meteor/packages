@@ -29,3 +29,4 @@ zimme:active-route
 arillo:flow-router-helpers
 jagi:astronomy
 react-meteor-data
+session
