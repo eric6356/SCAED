@@ -16,6 +16,42 @@ export const initFixture = () => {
         console.log('[Access: all] created');
     }
 
+    // let allAccess = c.Access.findOne({ code: 'ALL' });
+    // if (allAccess === undefined) {
+    //     allAccess = new c.Access();
+    //     allAccess.set({
+    //         code: 'ALL',
+    //         endpoint: '*',
+    //         description: 'all access'
+    //     });
+    //     allAccess.save();
+    //     console.log('[Access: all] created');
+    // }
+
+    // let allAccess = c.Access.findOne({ code: 'ALL' });
+    // if (allAccess === undefined) {
+    //     allAccess = new c.Access();
+    //     allAccess.set({
+    //         code: 'ALL',
+    //         endpoint: '*',
+    //         description: 'all access'
+    //     });
+    //     allAccess.save();
+    //     console.log('[Access: all] created');
+    // }
+
+    // let allAccess = c.Access.findOne({ code: 'ALL' });
+    // if (allAccess === undefined) {
+    //     allAccess = new c.Access();
+    //     allAccess.set({
+    //         code: 'ALL',
+    //         endpoint: '*',
+    //         description: 'all access'
+    //     });
+    //     allAccess.save();
+    //     console.log('[Access: all] created');
+    // }
+
     let adminRole = c.Role.findOne({ name: 'admin' });
     if (adminRole === undefined) {
         adminRole = new c.Role();

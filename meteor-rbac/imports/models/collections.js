@@ -19,10 +19,6 @@ const Person = Class.create({
             type: Mongo.ObjectID,
             optional: true
         },
-        managerID: {
-            type: String,
-            optional: true
-        },
         contactID: {
             type: Mongo.ObjectID,
             optional: true
@@ -40,17 +36,13 @@ export const AccountProfile = Class.create({
             type: Person,
             default: () => new Person()
         },
+        managerID: {
+            type: String,
+            optional: true
+        },
         roleIDs: {
             type: [Mongo.ObjectID],
             default: []
-        }
-    },
-    helpers: {
-        getPerson() {
-            return this.personID && Person.findOne(this.personID);
-        },
-        getRoles() {
-            return this.roleIDs ? Role.find({ _id: { $in: this.roleIDs } }) : [];
         }
     }
 });
@@ -62,37 +54,43 @@ export const Account = Class.create({
         username: String,
         profile: {
             type: AccountProfile,
-            optional: true
+            default: () => new AccountProfile()
+        }
+    },
+    helpers: {
+        getManager() {
+            return this.profile.managerID && Account.findOne(managerID);
+        },
+        getRoles() {
+            return this.profile.roleIDs ? Role.find({ _id: { $in: this.profile.roleIDs } }) : [];
+        },
+        getContact() {
+            const id = this.profile.person.contactID;
+            return id && Contact.findOne(id);
+        },
+        getJobProfile() {
+            const id = this.profile.person.jobProfileID;
+            return id && JobProfile.findOne(id);
         }
     }
 });
-// Account.createAccount = ({ username, password }) => {
-//     let account = Account.findOne({ username });
-//     if (account) {
-//         return {
-//             msg: 'Username exists.'
-//         };
-//     } else {
-//         account = new Account();
-//         account.username = username;
-//         account.save();
-
-//     }
-// };
 
 export const Contact = Class.create({
     name: 'Contact',
     collection: new Mongo.Collection('contacts', { idGeneration: 'MONGO' }),
     fields: {
-        personID: Mongo.ObjectID,
         email: {
             type: String,
             validators: [{ type: 'email' }]
         },
-        address: String,
+        address: {
+            type: String,
+            optional: true
+        },
         phone: {
             type: String,
-            validators: [{ type: 'regexp', param: /\+?\d+/ }] // FIXME
+            validators: [{ type: 'regexp', param: /\+?\d+/ }], // FIXME
+            optional: true
         }
     },
     indexes: {

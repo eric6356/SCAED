@@ -80,6 +80,8 @@ export class EditableTable extends React.Component {
                         <Popconfirm
                             title="Sure to cancel?"
                             onConfirm={() => this.cancel(record.key)}
+                            okText="Yes"
+                            cancelText="No"
                         >
                             <a style={{ marginLeft: '5px' }}>Cancel</a>
                         </Popconfirm>

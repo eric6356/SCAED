@@ -36,5 +36,36 @@ Meteor.methods({
             account.set({ username, profile });
             return account.save();
         }
+    },
+    'account.profile'({ _id, params }) {
+        if (Meteor.isServer) {
+            const account = c.Account.findOne(_id);
+            if (!account) {
+                throw new Meteor.Error(404);
+            }
+            const { firstName, lastName, email, address, phone, jobTitle } = params;
+            account.profile.person.firstName = firstName;
+            account.profile.person.lastName = lastName;
+
+            const jobProfile = account.getJobProfile() || new c.JobProfile();
+            jobProfile.title = jobTitle;
+            jobProfile.save();
+            if (!account.profile.person.jobProfileID) {
+                account.profile.person.jobProfileID = jobProfile._id;
+            }
+
+            let contact = account.getContact() || new c.Contact();
+            contact.address = address;
+            contact.phone = phone;
+            contact.email = email;
+            contact.save();
+            if (!account.profile.person.contactID) {
+                account.profile.person.contactID = contact._id;
+            }
+
+            account.save();
+
+            return account;
+        }
     }
 });

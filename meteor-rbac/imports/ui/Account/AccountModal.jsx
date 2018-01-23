@@ -35,7 +35,6 @@ class AccountFormComponent extends Component {
                     password: values.password,
                     profile: { roleIDs: values.roleIDs }
                 };
-                console.log(params);
                 Meteor.call('account.create', { ...params }, err => {
                     this.setState({ isSubmitting: false });
                     if (!err) {

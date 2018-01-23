@@ -10,4 +10,6 @@ Meteor.startup(() => {
     Meteor.publish('account.all', () => c.Account.find());
     Meteor.publish('role.all', () => c.Role.find());
     Meteor.publish('access.all', () => c.Access.find());
+    Meteor.publish('contact.all', () => c.Contact.find());
+    Meteor.publish('jobProfile.all', () => c.JobProfile.find());
 });

@@ -1,5 +1,6 @@
 import React from 'react';
 import { notification } from 'antd';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import { ensureString } from '../../api/utils';
 import { EditableTable, EditableMultipleOptionCell } from '../EditableTable';
@@ -30,8 +31,16 @@ const AccountTable = props => (
             profile: { ...account.profile, roleIDs: ensureString(account.profile.roleIDs) }
         }))}
         columns={[
+            {
+                title: 'Profile',
+                dataIndex: 'profile',
+                width: '20%',
+                render: (text, record) => (
+                    <a onClick={() => FlowRouter.go(`/rbac/account/${record.key}`)}>View</a>
+                )
+            },
             { title: 'Username', dataIndex: 'username', width: '20%' },
-            { title: 'Role', dataIndex: 'profile.roleIDs', width: '60%' }
+            { title: 'Role', dataIndex: 'profile.roleIDs', width: '40%' }
         ]}
         onSave={(account, cb) =>
             Meteor.call('account.modify', { _id: account._id, params: account }, err => {
