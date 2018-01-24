@@ -1,6 +1,9 @@
 import { Mongo } from 'meteor/mongo';
 import { Class } from 'meteor/jagi:astronomy';
 import { Meteor } from 'meteor/meteor';
+import { Enum } from 'meteor/jagi:astronomy';
+
+export const AllMenus = ['Home', 'Access', 'Role', 'Account', 'Wiki', 'Jira'];
 
 const Person = Class.create({
     name: 'Person',
@@ -140,6 +143,7 @@ export const Access = Class.create({
     fields: {
         code: String,
         endpoint: String,
+        menus: [String],
         description: {
             type: String,
             optional: true

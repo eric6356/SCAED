@@ -25,8 +25,23 @@ export const EditableMultipleOptionCell = ({ editable, value, onChange, options,
         value={value}
         onChange={newValue => onChange(newValue)}
     >
-        {options.map(option => <Option key={getStringID(option)}>{option[displayKey]}</Option>)}
+        {options.map(option => (
+            <Option key={displayKey ? getStringID(option) : option}>
+                {displayKey ? option[displayKey] : option}
+            </Option>
+        ))}
     </Select>
+);
+
+export const EditableTagOptionCell = ({ editable, value, onChange }) => (
+    <Select
+        mode="tags"
+        style={{ width: '100%' }}
+        value={value}
+        disabled={!editable}
+        onChange={newValue => onChange(newValue)}
+        tokenSeparators={[',']}
+    />
 );
 
 export class EditableTable extends React.Component {

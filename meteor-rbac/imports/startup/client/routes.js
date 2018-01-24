@@ -28,7 +28,7 @@ function makePrivateRouter(path, name, container) {
                     }
                 });
             } else {
-                redirect(`/portal?next=${encodeURIComponent(path)}`);
+                redirect(`/portal/?next=${encodeURIComponent(path)}`);
             }
         }
     });
@@ -49,10 +49,20 @@ FlowRouter.route('/logout', {
     name: 'Logout',
     action: () => {
         Session.set('currentRoleID', null);
-        Meteor.logout(() => FlowRouter.go('/portal'));
+        Meteor.logout(() => FlowRouter.go('/portal/'));
     }
 });
 
+FlowRouter.route('/wiki', {
+    name: 'Wiki',
+    action: () => mount(LayoutContainer, { main: <h1>Wiki</h1> })
+});
+
+FlowRouter.route('/jira', {
+    name: 'Jira',
+    action: () => mount(LayoutContainer, { main: <h1>Jira</h1> })
+});
+
 FlowRouter.notfound = {
-    action: () => mount(LayoutContainer, { main: <h1>{FlowRouter.current().path}</h1> })
+    action: () => mount(LayoutContainer, { main: <h1>Not Found</h1> })
 };

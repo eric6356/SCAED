@@ -50,7 +50,7 @@ class RoleFormComponent extends Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
-            <Form onSubmit={e => this.handleSubmit(e)}>
+            <Form onSubmit={e => this.handleSubmit(e)} autoComplete="nope">
                 <FormItem {...formItemLayout} label="Role Name">
                     {getFieldDecorator('name', {
                         rules: [

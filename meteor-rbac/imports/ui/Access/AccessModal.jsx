@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Modal, Button, Icon, Form, Input, message } from 'antd';
+import { Modal, Button, Icon, Form, Input, message, Select } from 'antd';
+const Option = Select.Option;
+
+import * as c from '../../models/collections';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -49,7 +52,7 @@ class AccessFormComponent extends Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
-            <Form onSubmit={e => this.handleSubmit(e)}>
+            <Form onSubmit={e => this.handleSubmit(e)} autoComplete="nope">
                 <FormItem {...formItemLayout} label="Code">
                     {getFieldDecorator('code', {
                         rules: [
@@ -71,6 +74,17 @@ class AccessFormComponent extends Component {
                             }
                         ]
                     })(<Input />)}
+                </FormItem>
+                <FormItem {...formItemLayout} label="Menus">
+                    {getFieldDecorator('menus', {
+                        rules: [{ required: true, message: 'Please select menu(s).' }]
+                    })(
+                        <Select mode="multiple">
+                            {c.AllMenus.concat(['All']).map(menu => (
+                                <Option key={menu}>{menu}</Option>
+                            ))}
+                        </Select>
+                    )}
                 </FormItem>
                 <FormItem {...formItemLayout} label="Description">
                     {getFieldDecorator('description')(<TextArea autosize={true} />)}

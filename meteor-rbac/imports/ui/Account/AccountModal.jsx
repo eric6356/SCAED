@@ -56,7 +56,7 @@ class AccountFormComponent extends Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
-            <Form onSubmit={e => this.handleSubmit(e)}>
+            <Form onSubmit={e => this.handleSubmit(e)} autoComplete="nope">
                 <FormItem {...formItemLayout} label="Username">
                     {getFieldDecorator('username', {
                         rules: [
@@ -112,7 +112,7 @@ export default class AccountModal extends Component {
                     New Account
                 </Button>
                 <Modal
-                    title="New Role"
+                    title="New Account"
                     width={600}
                     visible={this.state.visible}
                     onCancel={() => this.setState({ visible: false })}

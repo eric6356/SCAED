@@ -10,6 +10,7 @@ export const initFixture = () => {
         homeAccess.set({
             code: 'HOME',
             endpoint: '/',
+            menus: ['Home'],
             description: 'can access home'
         });
         homeAccess.save();
@@ -22,6 +23,7 @@ export const initFixture = () => {
         allAccess.set({
             code: 'ALL',
             endpoint: '*',
+            menus: ['All'],
             description: 'all access'
         });
         allAccess.save();
@@ -34,7 +36,8 @@ export const initFixture = () => {
         rbacAccess.set({
             code: 'ADMIN',
             endpoint: '/rbac/*',
-            description: 'can access access control system'
+            menus: ['Access', 'Role', 'Account'],
+            description: 'can access AC system'
         });
         rbacAccess.save();
         console.log('[Access: ADMIN] created');
@@ -46,6 +49,7 @@ export const initFixture = () => {
         jiraAccess.set({
             code: 'JIRA',
             endpoint: '/jira/*',
+            menus: ['Jira'],
             description: 'can access jira'
         });
         jiraAccess.save();
@@ -58,6 +62,7 @@ export const initFixture = () => {
         wikiAccess.set({
             code: 'WIKI',
             endpoint: '/wiki/*',
+            menus: ['Wiki'],
             description: 'can access wiki'
         });
         wikiAccess.save();
@@ -72,7 +77,7 @@ export const initFixture = () => {
             accessIDs: [allAccess._id]
         });
         superRole.save();
-        console.log('[Rold: Super Admin] created');
+        console.log('[Role: Super Admin] created');
     }
 
     let adminRole = c.Role.findOne({ name: 'Admin' });
@@ -83,7 +88,7 @@ export const initFixture = () => {
             accessIDs: [rbacAccess._id, homeAccess._id]
         });
         adminRole.save();
-        console.log('[Rold: Admin] created');
+        console.log('[Role: Admin] created');
     }
 
     let docWriterRole = c.Role.findOne({ name: 'Doc Writer' });
@@ -94,7 +99,7 @@ export const initFixture = () => {
             accessIDs: [wikiAccess._id, homeAccess._id]
         });
         docWriterRole.save();
-        console.log('[Rold: Admin] created');
+        console.log('[Role: Admin] created');
     }
 
     let devRole = c.Role.findOne({ name: 'Developer' });
@@ -105,7 +110,7 @@ export const initFixture = () => {
             accessIDs: [wikiAccess._id, jiraAccess._id, homeAccess._id]
         });
         devRole.save();
-        console.log('[Rold: Dev] created');
+        console.log('[Role: Dev] created');
     }
 
     let adminAccount = c.Account.findOne({ username: 'admin' });
@@ -130,5 +135,29 @@ export const initFixture = () => {
             }
         });
         console.log('[Account: super] created');
+    }
+
+    let aliceAccount = c.Account.findOne({ username: 'alice' });
+    if (aliceAccount === undefined) {
+        aliceAccount = Accounts.createUser({
+            username: 'alice',
+            password: 'alice',
+            profile: {
+                roleIDs: [devRole._id]
+            }
+        });
+        console.log('[Account: alice] created');
+    }
+
+    let bobAccount = c.Account.findOne({ username: 'bob' });
+    if (bobAccount === undefined) {
+        bobAccount = Accounts.createUser({
+            username: 'bob',
+            password: 'bob',
+            profile: {
+                roleIDs: [adminRole._id, docWriterRole._id]
+            }
+        });
+        console.log('[Account: bob] created');
     }
 };

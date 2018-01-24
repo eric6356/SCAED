@@ -10,7 +10,7 @@ const Layout = ({ main, menus, user }) => (
     <AntdLayout>
         <Sider style={{ minHeight: '100vh', paddingTop: '26px' }}>
             <Menu theme="dark" onClick={({ key }) => FlowRouter.go(key)}>
-                {menus.map(one => <Menu.Item key={one}>{one}</Menu.Item>)}
+                {menus && menus.map(one => <Menu.Item key={one}>{one}</Menu.Item>)}
             </Menu>
         </Sider>
         <AntdLayout>

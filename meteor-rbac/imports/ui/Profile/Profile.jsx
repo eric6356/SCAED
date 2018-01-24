@@ -45,7 +45,7 @@ class ProfileFormComponent extends Component {
         const { getFieldDecorator } = this.props.form;
         const { account, contact, jobProfile } = this.props;
         return (
-            <Form onSubmit={e => this.handleSubmit(e)}>
+            <Form onSubmit={e => this.handleSubmit(e)} autoComplete="nope">
                 <FormItem {...formItemLayout} label="First Name">
                     {getFieldDecorator('firstName', {
                         initialValue: account && account.profile.person.firstName,

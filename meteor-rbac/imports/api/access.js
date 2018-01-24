@@ -21,9 +21,9 @@ Meteor.methods({
                 throw Meteor.Error(404);
             }
 
-            const { code, endpoint, description } = params;
+            const { code, endpoint, description, menus } = params;
             // TODO :validate code uniqueness
-            access.set({ code, endpoint, description });
+            access.set({ code, endpoint, description, menus });
             return access.save();
         }
     }

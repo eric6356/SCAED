@@ -28,15 +28,7 @@ Meteor.methods({
     },
     'role.canAccess'({ _id, path }) {
         if (Meteor.isServer) {
-            const account = Meteor.user();
-            let roleExists = false;
-            for (let roleID of account.profile.roleIDs) {
-                if (roleID.equals(_id)) {
-                    roleExists = true;
-                    break;
-                }
-            }
-            if (!roleExists) {
+            if (!userHasRole(_id)) {
                 return false;
             }
 
@@ -48,5 +40,33 @@ Meteor.methods({
                 });
             return canAccess;
         }
+    },
+    'role.menus'({ _id }) {
+        if (Meteor.isServer) {
+            if (!userHasRole(_id)) {
+                return [];
+            }
+
+            let menus = {};
+            c.Role.findOne(_id)
+                .getAccesses()
+                .forEach(access => {
+                    access.menus.forEach(menu => (menus[menu] = true));
+                });
+            return menus['All'] ? c.AllMenus : Object.keys(menus);
+        }
     }
 });
+
+function userHasRole(_id) {
+    const account = Meteor.user();
+    if (!account) {
+        return false;
+    }
+    for (let roleID of account.profile.roleIDs) {
+        if (roleID.equals(_id)) {
+            return true;
+        }
+    }
+    return false;
+}
