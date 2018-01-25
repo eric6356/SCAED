@@ -61,5 +61,20 @@ Meteor.methods({
 
             return account;
         }
+    },
+    'account.grantTempAccess'({ _id, params }) {
+        if (Meteor.isServer) {
+            const account = c.Account.findOne(_id);
+            if (!account) {
+                throw new Meteor.Error(404);
+            }
+            const ta = {
+                grantedAt: new Date(),
+                accessID: ensureMongo(params.accessID),
+                expireAt: params.expireAt
+            };
+            account.profile.tempAccesses.push(ta);
+            return account.save();
+        }
     }
 });

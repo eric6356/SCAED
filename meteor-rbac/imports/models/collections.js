@@ -3,7 +3,7 @@ import { Class } from 'meteor/jagi:astronomy';
 import { Meteor } from 'meteor/meteor';
 import { Enum } from 'meteor/jagi:astronomy';
 
-export const AllMenus = ['Home', 'Access', 'Role', 'Account', 'Wiki', 'Jira'];
+export const AllMenus = ['Home', 'Access', 'Role', 'Account', 'Temp Access', 'Wiki', 'Jira'];
 
 const Person = Class.create({
     name: 'Person',
@@ -32,6 +32,18 @@ const Person = Class.create({
     }
 });
 
+const TempAccess = Class.create({
+    name: 'TempAccess',
+    fields: {
+        accessID: Mongo.ObjectID,
+        grantedAt: Date,
+        expireAt: Date
+    },
+    helpers: {
+        isExpired: () => new Date() > this.expireAt
+    }
+});
+
 export const AccountProfile = Class.create({
     name: 'AccountProfile',
     fields: {
@@ -45,6 +57,10 @@ export const AccountProfile = Class.create({
         },
         roleIDs: {
             type: [Mongo.ObjectID],
+            default: []
+        },
+        tempAccesses: {
+            type: [TempAccess],
             default: []
         }
     }

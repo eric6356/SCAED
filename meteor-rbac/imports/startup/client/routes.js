@@ -12,6 +12,8 @@ import Access from '../../ui/Access';
 import Role from '../../ui/Role';
 import Account from '../../ui/Account';
 import Profile from '../../ui/Profile';
+import TempAccess from '../../ui/TempAccess';
+
 import * as c from '../../models/collections';
 
 function makePrivateRouter(path, name, container) {
@@ -39,6 +41,7 @@ makePrivateRouter('/rbac/access', 'Access', <Access />);
 makePrivateRouter('/rbac/role', 'Role', <Role />);
 makePrivateRouter('/rbac/account', 'Account', <Account />);
 makePrivateRouter('/rbac/account/:_id', 'Profile', <Profile />);
+makePrivateRouter('/rbac/tempAccess', 'Temp Access', <TempAccess />);
 
 FlowRouter.route('/portal', {
     name: 'Portal',
