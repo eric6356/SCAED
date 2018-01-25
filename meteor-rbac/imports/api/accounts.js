@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
+import wildcard from 'wildcard';
 
 import * as c from '../models/collections';
 import { ensureMongo } from './utils';
@@ -85,6 +86,37 @@ Meteor.methods({
             }
             account.profile.tempAccesses[i].expireAt = new Date();
             return account.save();
+        }
+    },
+    'account.canTempAccess'({ _id, path }) {
+        if (Meteor.isServer) {
+            const account = c.Account.findOne(_id);
+            if (!account) {
+                throw new Meteor.Error(404);
+            }
+
+            let canAccess = false;
+            account.profile.tempAccesses.filter(one => !one.isExpired()).forEach(tempAccess => {
+                const access = c.Access.findOne(tempAccess.accessID);
+                canAccess = canAccess || !!wildcard(access.endpoint, path);
+            });
+            return canAccess;
+        }
+    },
+    'account.tempMenus'({ _id }) {
+        if (Meteor.isServer) {
+            const account = c.Account.findOne(_id);
+            if (!account) {
+                throw new Meteor.Error(404);
+            }
+
+            let menus = {};
+
+            account.profile.tempAccesses.filter(one => !one.isExpired()).forEach(tempAccess => {
+                const access = c.Access.findOne(tempAccess.accessID);
+                access.menus.forEach(menu => (menus[menu] = true));
+            });
+            return menus['All'] ? c.AllMenus : Object.keys(menus);
         }
     }
 });

@@ -26,7 +26,17 @@ function makePrivateRouter(path, name, container) {
                     if (res) {
                         mount(LayoutContainer, { main: container });
                     } else {
-                        FlowRouter.go('/404');
+                        Meteor.call(
+                            'account.canTempAccess',
+                            { _id: Meteor.userId(), path },
+                            (err, res) => {
+                                if (res) {
+                                    mount(LayoutContainer, { main: container });
+                                } else {
+                                    FlowRouter.go('/404');
+                                }
+                            }
+                        );
                     }
                 });
             } else {

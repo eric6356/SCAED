@@ -28,7 +28,9 @@ const Person = Class.create({
         }
     },
     helpers: {
-        getFullName: () => `${this.firstName} ${this.lastName}`
+        getFullName() {
+            return `${this.firstName} ${this.lastName}`;
+        }
     }
 });
 
@@ -40,7 +42,9 @@ const TempAccess = Class.create({
         expireAt: Date
     },
     helpers: {
-        isExpired: () => new Date() > this.expireAt
+        isExpired() {
+            return new Date() > this.expireAt;
+        }
     }
 });
 
