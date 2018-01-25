@@ -109,7 +109,7 @@ export class EditableTable extends React.Component {
     }
 
     handleChange(value, key, column) {
-        const newData = [...this.state.data];
+        const newData = JSON.parse(JSON.stringify(this.state.data)); // [...this.state.data];
         const target = newData.filter(one => one.key === key)[0];
         if (target) {
             let item = target.item;
@@ -123,7 +123,7 @@ export class EditableTable extends React.Component {
     }
 
     edit(key) {
-        const newData = [...this.state.data];
+        const newData = JSON.parse(JSON.stringify(this.state.data)); // [...this.state.data];
         const target = newData.filter(one => one.key === key)[0];
         if (target) {
             target.editable = true;
@@ -132,7 +132,7 @@ export class EditableTable extends React.Component {
     }
 
     save(key) {
-        const newData = [...this.state.data];
+        const newData = JSON.parse(JSON.stringify(this.state.data)); // [...this.state.data];
         const target = newData.filter(one => one.key === key)[0];
         if (target) {
             this.props.onSave(target.item, err => {
