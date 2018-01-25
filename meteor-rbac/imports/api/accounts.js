@@ -76,5 +76,15 @@ Meteor.methods({
             account.profile.tempAccesses.push(ta);
             return account.save();
         }
+    },
+    'account.revokeTempAccess'({ _id, i }) {
+        if (Meteor.isServer) {
+            const account = c.Account.findOne(_id);
+            if (!account) {
+                throw new Meteor.Error(404);
+            }
+            account.profile.tempAccesses[i].expireAt = new Date();
+            return account.save();
+        }
     }
 });

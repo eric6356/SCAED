@@ -11,12 +11,13 @@ export default (TempAccessContainer = withTracker(props => {
     Meteor.subscribe('access.all');
     const accountID = FlowRouter.getQueryParam('accountID');
     const accountToAdd = accountID && c.Account.findOne(accountID);
+    const accesses = c.Access.find().fetch();
     return {
         accountToAdd,
         allAccounts: c.Account.find().fetch(),
         accountsWithTempAccess: c.Account.find({
             'profile.tempAccesses.0': { $exists: true }
         }).fetch(),
-        accesses: c.Access.find().fetch()
+        accesses
     };
 })(props => <TempAccess {...props} />));
