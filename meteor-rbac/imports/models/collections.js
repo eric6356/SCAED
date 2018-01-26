@@ -3,7 +3,16 @@ import { Class } from 'meteor/jagi:astronomy';
 import { Meteor } from 'meteor/meteor';
 import { Enum } from 'meteor/jagi:astronomy';
 
-export const AllMenus = ['Home', 'Access', 'Role', 'Account', 'Temp Access', 'Wiki', 'Jira'];
+export const AllMenus = [
+    'Home',
+    'Access',
+    'Role',
+    'Account',
+    'Temp Access',
+    'Wiki',
+    'Jira',
+    'SharePoint'
+];
 
 const Person = Class.create({
     name: 'Person',

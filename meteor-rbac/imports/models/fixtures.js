@@ -30,7 +30,7 @@ export const initFixture = () => {
         console.log('[Access: all] created');
     }
 
-    let rbacAccess = c.Access.findOne({ code: 'ADMIN' });
+    let rbacAccess = c.Access.findOne({ code: 'AC' });
     if (rbacAccess === undefined) {
         rbacAccess = new c.Access();
         rbacAccess.set({
@@ -50,7 +50,7 @@ export const initFixture = () => {
             code: 'JIRA',
             endpoint: '/jira/*',
             menus: ['Jira'],
-            description: 'can access jira'
+            description: 'can access Jira'
         });
         jiraAccess.save();
         console.log('[Access: JIRA] created');
@@ -63,10 +63,23 @@ export const initFixture = () => {
             code: 'WIKI',
             endpoint: '/wiki/*',
             menus: ['Wiki'],
-            description: 'can access wiki'
+            description: 'can access Wiki'
         });
         wikiAccess.save();
         console.log('[Access: WIKI] created');
+    }
+
+    let spAccess = c.Access.findOne({ code: 'SHAREPOINT' });
+    if (spAccess === undefined) {
+        spAccess = new c.Access();
+        spAccess.set({
+            code: 'SHAREPOINT',
+            endpoint: '/sharepoint/*',
+            menus: ['SharePoint'],
+            description: 'can access SharePoint'
+        });
+        spAccess.save();
+        console.log('[Access: SHAREPOINT] created');
     }
 
     let superRole = c.Role.findOne({ name: 'Super Admin' });
@@ -113,6 +126,17 @@ export const initFixture = () => {
         console.log('[Role: Dev] created');
     }
 
+    let salesRole = c.Role.findOne({ name: 'Sales' });
+    if (salesRole === undefined) {
+        salesRole = new c.Role();
+        salesRole.set({
+            name: 'Sales',
+            accessIDs: [spAccess._id, homeAccess._id]
+        });
+        salesRole.save();
+        console.log('[Role: Sales] created');
+    }
+
     // let adminAccount = c.Account.findOne({ username: 'admin' });
     // if (adminAccount === undefined) {
     //     adminAccount = Accounts.createUser({
@@ -155,7 +179,7 @@ export const initFixture = () => {
             username: 'bob',
             password: 'bob',
             profile: {
-                roleIDs: [adminRole._id, docWriterRole._id]
+                roleIDs: [docWriterRole._id, salesRole._id]
             }
         });
         console.log('[Account: bob] created');

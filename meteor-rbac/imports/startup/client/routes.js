@@ -54,6 +54,7 @@ makePrivateRouter('/rbac/account/:_id', 'Profile', <Profile />);
 makePrivateRouter('/rbac/tempAccess', 'Temp Access', <TempAccess />);
 makePrivateRouter('/wiki', 'Wiki', <h1>Wiki</h1>);
 makePrivateRouter('/jira', 'Jira', <h1>Jira</h1>);
+makePrivateRouter('/sharepoint', 'SharePoint', <h1>SharePoint</h1>);
 
 FlowRouter.route('/portal', {
     name: 'Portal',
