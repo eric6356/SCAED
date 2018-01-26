@@ -30,3 +30,4 @@ arillo:flow-router-helpers
 jagi:astronomy
 react-meteor-data
 session
+u2622:persistent-session

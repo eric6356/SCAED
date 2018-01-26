@@ -7,12 +7,14 @@ import * as c from '../../models/collections';
 
 export default (RoleSwitcherContainer = withTracker(props => {
     Meteor.subscribe('role.all');
-    const id = Meteor.user() && Meteor.user()._id;
+    const _id = Meteor.userId();
     const currentRoleID = Session.get('currentRoleID');
     return {
         currentRoleID,
-        roles: c.Account.findOne(id)
-            .getRoles()
-            .fetch()
+        roles: _id
+            ? c.Account.findOne(_id)
+                  .getRoles()
+                  .fetch()
+            : []
     };
 })(props => <RoleSwitcher {...props} />));
