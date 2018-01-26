@@ -27,8 +27,8 @@ const RoleTable = props => (
         accesses={props.accesses}
         items={props.roles.map(role => ({ ...role, accessIDs: ensureString(role.accessIDs) }))}
         columns={[
-            { title: 'Role Name', dataIndex: 'name', width: '20%' },
-            { title: 'Access', dataIndex: 'accessIDs', width: '60%' }
+            { title: 'Role Name', dataIndex: 'name' },
+            { title: 'Access', dataIndex: 'accessIDs' }
         ]}
         onSave={(role, cb) =>
             Meteor.call('role.modify', { _id: role._id, params: role }, err => {

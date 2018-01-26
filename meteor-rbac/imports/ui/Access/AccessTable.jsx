@@ -26,10 +26,10 @@ const AccessTable = props => (
     <EditableAccessTable
         items={props.accesses}
         columns={[
-            { title: 'Code', dataIndex: 'code', width: '15%' },
-            { title: 'Endpoint', dataIndex: 'endpoint', width: '15%' },
-            { title: 'Menus', dataIndex: 'menus', width: '15%' },
-            { title: 'Description', dataIndex: 'description', width: '30%' }
+            { title: 'Code', dataIndex: 'code' },
+            { title: 'Endpoint', dataIndex: 'endpoint' },
+            { title: 'Menus', dataIndex: 'menus' },
+            { title: 'Description', dataIndex: 'description' }
         ]}
         onSave={(access, cb) =>
             Meteor.call('access.modify', { _id: access._id, params: access }, err => {

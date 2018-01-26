@@ -14,7 +14,7 @@ export const initFixture = () => {
             description: 'can access home'
         });
         homeAccess.save();
-        console.log('[Access: all] created');
+        console.log('[Access: home] created');
     }
 
     let allAccess = c.Access.findOne({ code: 'ALL' });
@@ -34,13 +34,13 @@ export const initFixture = () => {
     if (rbacAccess === undefined) {
         rbacAccess = new c.Access();
         rbacAccess.set({
-            code: 'ADMIN',
+            code: 'AC',
             endpoint: '/rbac/*',
-            menus: ['Access', 'Role', 'Account'],
+            menus: ['Access', 'Role', 'Account', 'Temp Access'],
             description: 'can access AC system'
         });
         rbacAccess.save();
-        console.log('[Access: ADMIN] created');
+        console.log('[Access: AC] created');
     }
 
     let jiraAccess = c.Access.findOne({ code: 'JIRA' });
@@ -113,17 +113,17 @@ export const initFixture = () => {
         console.log('[Role: Dev] created');
     }
 
-    let adminAccount = c.Account.findOne({ username: 'admin' });
-    if (adminAccount === undefined) {
-        adminAccount = Accounts.createUser({
-            username: 'admin',
-            password: 'admin',
-            profile: {
-                roleIDs: [adminRole._id]
-            }
-        });
-        console.log('[Account: admin] created');
-    }
+    // let adminAccount = c.Account.findOne({ username: 'admin' });
+    // if (adminAccount === undefined) {
+    //     adminAccount = Accounts.createUser({
+    //         username: 'admin',
+    //         password: 'admin',
+    //         profile: {
+    //             roleIDs: [adminRole._id]
+    //         }
+    //     });
+    //     console.log('[Account: admin] created');
+    // }
 
     let superAccount = c.Account.findOne({ username: 'super' });
     if (superAccount === undefined) {

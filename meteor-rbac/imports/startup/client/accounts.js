@@ -6,10 +6,10 @@ import * as c from '../../models/collections';
 
 Accounts.onLogin(() => {
     const roleID = Accounts.user().profile.roleIDs[0];
-    Session.setDefault('currentRoleID', roleID);
+    Session.setDefaultAuth('currentRoleID', roleID);
 
     Meteor.call('account.tempMenus', { _id: Accounts.user()._id }, (err, res) => {
-        Session.set('tempMenus', res);
+        Session.setAuth('tempMenus', res);
     });
 
     const next = FlowRouter.current().queryParams.next || '/';

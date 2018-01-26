@@ -52,6 +52,8 @@ makePrivateRouter('/rbac/role', 'Role', <Role />);
 makePrivateRouter('/rbac/account', 'Account', <Account />);
 makePrivateRouter('/rbac/account/:_id', 'Profile', <Profile />);
 makePrivateRouter('/rbac/tempAccess', 'Temp Access', <TempAccess />);
+makePrivateRouter('/wiki', 'Wiki', <h1>Wiki</h1>);
+makePrivateRouter('/jira', 'Jira', <h1>Jira</h1>);
 
 FlowRouter.route('/portal', {
     name: 'Portal',
@@ -61,19 +63,8 @@ FlowRouter.route('/portal', {
 FlowRouter.route('/logout', {
     name: 'Logout',
     action: () => {
-        Session.set('currentRoleID', null);
         Meteor.logout(() => FlowRouter.go('/portal/'));
     }
-});
-
-FlowRouter.route('/wiki', {
-    name: 'Wiki',
-    action: () => mount(LayoutContainer, { main: <h1>Wiki</h1> })
-});
-
-FlowRouter.route('/jira', {
-    name: 'Jira',
-    action: () => mount(LayoutContainer, { main: <h1>Jira</h1> })
 });
 
 FlowRouter.notfound = {

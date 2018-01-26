@@ -34,22 +34,20 @@ const AccountTable = props => (
             {
                 title: 'Profile',
                 dataIndex: 'profile',
-                width: '10%',
                 render: (text, record) => (
                     <a onClick={() => FlowRouter.go(`/rbac/account/${record.key}`)}>View</a>
                 )
             },
             {
                 title: 'Temp Access',
-                width: '15%',
                 render: (text, record) => (
                     <a onClick={() => FlowRouter.go(`/rbac/tempAccess?accountID=${record.key}`)}>
                         Grant
                     </a>
                 )
             },
-            { title: 'Username', dataIndex: 'username', width: '15%' },
-            { title: 'Role', dataIndex: 'profile.roleIDs', width: '40%' }
+            { title: 'Username', dataIndex: 'username' },
+            { title: 'Role', dataIndex: 'profile.roleIDs' }
         ]}
         onSave={(account, cb) =>
             Meteor.call('account.modify', { _id: account._id, params: account }, err => {
