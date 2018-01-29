@@ -23,5 +23,9 @@ export default (UPortContainer = withTracker(props => {
         uport
     };
 })(props => (
-    <Spin spinning={props.loading}>{Meteor.user() === null && <UPort {...props} />}</Spin>
+    <Spin spinning={props.loading}>
+        <div style={{ width: '100vw', height: '100vh' }}>
+            {Meteor.user() === null && <UPort {...props} />}
+        </div>
+    </Spin>
 )));

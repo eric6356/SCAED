@@ -8,7 +8,7 @@ import RoleSwitcher from '../RoleSwitcher';
 
 const Layout = ({ main, menus, user }) => (
     <AntdLayout>
-        <Sider style={{ minHeight: '100vh', paddingTop: '26px' }}>
+        <Sider style={{ minHeight: '100vh', paddingTop: '26px' }} width={130}>
             <Menu
                 theme="dark"
                 defaultSelectedKeys={['Home']}

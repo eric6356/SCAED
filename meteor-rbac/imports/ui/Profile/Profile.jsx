@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, message } from 'antd';
 const FormItem = Form.Item;
+const { TextArea } = Input;
 
 const formItemLayout = {
     labelCol: {
@@ -91,7 +92,7 @@ class ProfileFormComponent extends Component {
                 <FormItem {...formItemLayout} label="Phone">
                     {getFieldDecorator('phone', {
                         initialValue: contact && contact.phone
-                    })(<Input type="tel" />)}
+                    })(<Input readOnly={!this.state.editing} type="tel" />)}
                 </FormItem>
                 <FormItem {...formItemLayout} label="Job Title">
                     {getFieldDecorator('jobTitle', {
@@ -105,6 +106,13 @@ class ProfileFormComponent extends Component {
                     })(<Input readOnly={!this.state.editing} />)}
                 </FormItem>
                 {/* TODO: manager */}
+                <FormItem {...formItemLayout} label="uPort Credentials">
+                    {getFieldDecorator('uportCredentials', {
+                        initialValue:
+                            account &&
+                            JSON.stringify(account.profile.uportCredentials, null, '    ')
+                    })(<TextArea readOnly={true} autosize />)}
+                </FormItem>
                 <FormItem {...tailFormItemLayout}>
                     {this.state.editing ? (
                         <Button type="primary" htmlType="submit">

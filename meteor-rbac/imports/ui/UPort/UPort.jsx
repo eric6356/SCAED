@@ -24,6 +24,6 @@ export default class UPort extends Component {
         if (this.props.uport) {
             this.showModal();
         }
-        return <div style={{ width: '100vw', height: '100vh' }} />;
+        return <div />;
     }
 }
