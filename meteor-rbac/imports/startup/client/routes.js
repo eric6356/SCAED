@@ -13,6 +13,7 @@ import Role from '../../ui/Role';
 import Account from '../../ui/Account';
 import Profile from '../../ui/Profile';
 import TempAccess from '../../ui/TempAccess';
+import UPort from '../../ui/UPort';
 
 import * as c from '../../models/collections';
 
@@ -40,7 +41,7 @@ function makePrivateRouter(path, name, container) {
                     }
                 });
             } else {
-                redirect(`/portal/?next=${encodeURIComponent(path)}`);
+                redirect(`/uport/?next=${encodeURIComponent(path)}`);
             }
         }
     });
@@ -61,10 +62,15 @@ FlowRouter.route('/portal', {
     action: () => mount(Portal)
 });
 
+FlowRouter.route('/uport', {
+    name: 'UPort',
+    action: () => mount(UPort)
+});
+
 FlowRouter.route('/logout', {
     name: 'Logout',
     action: () => {
-        Meteor.logout(() => FlowRouter.go('/portal/'));
+        Meteor.logout(() => FlowRouter.go('/uport'));
     }
 });
 

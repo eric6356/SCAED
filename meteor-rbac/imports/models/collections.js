@@ -60,6 +60,10 @@ const TempAccess = Class.create({
 export const AccountProfile = Class.create({
     name: 'AccountProfile',
     fields: {
+        uportCredentials: {
+            type: Object,
+            optional: true
+        },
         person: {
             type: Person,
             default: () => new Person()
@@ -180,5 +184,23 @@ export const Access = Class.create({
     },
     indexes: {
         code: { fields: { code: 1 }, options: { unique: true } }
+    }
+});
+
+export const UPortConfig = Class.create({
+    name: 'UPortConfig',
+    collection: new Mongo.Collection('uport_config', { idGeneration: 'MONGO' }),
+    fields: {
+        network: String,
+        clientId: String,
+        signer: String,
+        rpcUrl: {
+            type: String,
+            optional: true
+        },
+        infuraApiKey: {
+            type: String,
+            optional: true
+        }
     }
 });
