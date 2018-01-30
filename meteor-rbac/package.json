@@ -23,5 +23,11 @@
     },
     "devDependencies": {
         "standard": "^10.0.3"
+    },
+    "standard": {
+        "ignore": [
+            "/node_modules/",
+            "/.meteor/"
+        ]
     }
 }
