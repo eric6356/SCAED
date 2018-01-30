@@ -1,4 +1,4 @@
-import './accounts';
-import './access';
-import './role';
-import './uport';
+import './accounts'
+import './access'
+import './role'
+import './uport'
