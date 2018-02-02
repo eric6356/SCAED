@@ -216,4 +216,12 @@ contract RBAC {
 
         return accounts[_id].roleIDs;
     }
+
+    function register() public {
+        personCounter++;
+        people[personCounter] = Person("", "", false);
+
+        accountCounter++;
+        accounts[accountCounter] = Account(msg.sender, personCounter, 0, false, new uint[](0));
+    }
 }
