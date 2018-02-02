@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor'
 import { withTracker } from 'meteor/react-meteor-data'
 import { Spin } from 'antd'
 import { Connect, SimpleSigner } from 'uport-connect'
+import Web3 from 'web3'
 
 import UPort from './UPort'
 import * as c from '../../models/collections'
@@ -17,6 +18,8 @@ const UPortContainer = withTracker(props => {
     const config = c.UPortConfig.findOne({ network })
     config.signer = SimpleSigner(config.signer)
     uport = new Connect('INFO7510', config)
+
+    window.up3 = new Web3(uport.getWeb3().currentProvider)
   }
   return {
     loading,
