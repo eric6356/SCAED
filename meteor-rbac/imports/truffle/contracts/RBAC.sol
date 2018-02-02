@@ -48,6 +48,7 @@ contract RBAC {
 
     function RBAC() public {
         owners.push(msg.sender);
+        menus[0] = "All";
         menus[1] = "Home";
         menus[2] = "Access";
         menus[3] = "Role";

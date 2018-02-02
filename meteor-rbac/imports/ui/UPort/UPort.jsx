@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { Accounts } from 'meteor/accounts-base'
-// import MNID from 'mnid'
+import MNID from 'mnid'
 
-// import { web3, Hello } from '../../../imports/truffle'
-import JSONData from '../../../imports/truffle/build/contracts/RBAC.json'
+import api from '../../api'
 
 const waitForMined = (txHash, response, pendingCB, successCB) => {
   if (response.blockNumber) {
@@ -17,7 +16,7 @@ const waitForMined = (txHash, response, pendingCB, successCB) => {
 // Recursive polling to do continuous checks for when the transaction was mined
 const pollingLoop = (txHash, response, pendingCB, successCB) => {
   setTimeout(function () {
-    window.up3.eth.getTransaction(txHash, (error, response) => {
+    api.web3.eth.getTransaction(txHash, (error, response) => {
       if (error) { throw error }
       if (response === null) {
         response = { blockNumber: null }
@@ -29,24 +28,31 @@ const pollingLoop = (txHash, response, pendingCB, successCB) => {
 
 export default class UPort extends Component {
   showModal () {
-    this.props.uport
+    !this.props.loading && api.uport
       .requestCredentials({
         requested: ['name', 'phone', 'country', 'email'],
         notifications: true
       })
       .then(credentials => {
-        const instance = window.up3.eth.contract(JSONData.abi).at(JSONData.networks[4].address)
+        let instance
+
+        api.RBACContract.deployed().then(i => {
+          instance = i
+        }).then(() => instance.totalOwners())
+        .then(console.log)
+        // api.RBACInstance.methods.owners(0)
+
+        // console.log(credentials.address)
+
         // const address = MNID.decode(credentials.address).address
-        // const res = window.up3.eth.sendTransaction({from: address, to: '0x0d6eafe9ca0258b97839b07230a7ea8fa61b632a', value: window.up3.toWei(0.1, 'ether')}, (err, txHash) => {
+        // console.log(address)
+        // const res = api.web3.eth.sendTransaction({from: address, to: '0x0d6eafe9ca0258b97839b07230a7ea8fa61b632a', value: api.web3.toWei(0.1, 'ether')}, (err, txHash) => {
         //   if (err) {
         //     throw err
         //   }
         //   console.log(txHash)
         // })
         // console.log(res)
-
-        instance.totalOwners(console.log)
-        instance.owners(0, console.log)
 
         // Hello.setHello('world', {from: address}, (error, txHash) => {
         //   if (error) { throw error }
@@ -77,9 +83,7 @@ export default class UPort extends Component {
   }
 
   render () {
-    if (this.props.uport) {
-      this.showModal()
-    }
+    this.showModal()
     return <div />
   }
 }

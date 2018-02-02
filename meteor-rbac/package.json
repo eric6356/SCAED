@@ -19,6 +19,7 @@
         "react-router-dom": "^4.2.2",
         "truffle-contract": "^3.0.2",
         "uport-connect": "^0.7.0",
+        "web3": "^1.0.0-beta.29",
         "wildcard": "^1.1.2"
     },
     "devDependencies": {
