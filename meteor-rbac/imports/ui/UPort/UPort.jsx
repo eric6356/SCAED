@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Accounts } from 'meteor/accounts-base'
-import MNID from 'mnid'
+// import MNID from 'mnid'
 
 // import { web3, Hello } from '../../../imports/truffle'
-import HelloData from '../../../imports/truffle/build/contracts/Hello.json'
+import JSONData from '../../../imports/truffle/build/contracts/RBAC.json'
 
 const waitForMined = (txHash, response, pendingCB, successCB) => {
   if (response.blockNumber) {
@@ -35,8 +35,8 @@ export default class UPort extends Component {
         notifications: true
       })
       .then(credentials => {
-        const Hello = window.up3.eth.contract(HelloData.abi).at(HelloData.networks[4].address)
-        const address = MNID.decode(credentials.address).address
+        const instance = window.up3.eth.contract(JSONData.abi).at(JSONData.networks[4].address)
+        // const address = MNID.decode(credentials.address).address
         // const res = window.up3.eth.sendTransaction({from: address, to: '0x0d6eafe9ca0258b97839b07230a7ea8fa61b632a', value: window.up3.toWei(0.1, 'ether')}, (err, txHash) => {
         //   if (err) {
         //     throw err
@@ -45,24 +45,25 @@ export default class UPort extends Component {
         // })
         // console.log(res)
 
-        Hello.getHello(console.log)
+        instance.totalOwners(console.log)
+        instance.owners(0, console.log)
 
-        Hello.setHello('world', {from: address}, (error, txHash) => {
-          if (error) { throw error }
-          console.log(txHash)
-          waitForMined(txHash, { blockNumber: null }, // see next area
-            function pendingCB () {
-              console.log('still pending')
-              // Signal to the user you're still waiting
-              // for a block confirmation
-            },
-            function successCB (data) {
-              console.log(data)
-              // Great Success!
-              // Likely you'll call some eventPublisherMethod(txHash, data)
-            }
-          )
-        })
+        // Hello.setHello('world', {from: address}, (error, txHash) => {
+        //   if (error) { throw error }
+        //   console.log(txHash)
+        //   waitForMined(txHash, { blockNumber: null }, // see next area
+        //     function pendingCB () {
+        //       console.log('still pending')
+        //       // Signal to the user you're still waiting
+        //       // for a block confirmation
+        //     },
+        //     function successCB (data) {
+        //       console.log(data)
+        //       // Great Success!
+        //       // Likely you'll call some eventPublisherMethod(txHash, data)
+        //     }
+        //   )
+        // })
 
         Accounts.callLoginMethod({
           methodArguments: [{ uportCredentials: credentials }],

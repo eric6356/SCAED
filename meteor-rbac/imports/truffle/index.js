@@ -1,7 +1,7 @@
 import Web3 from 'web3'
 import TruffleContract from 'truffle-contract'
 
-import HelloData from './build/contracts/Hello.json'
+import JSONData from './build/contracts/RBAC.json'
 
 export const web3 = new Web3('http://localhost:8545')
 const getContract = data => {
@@ -18,4 +18,4 @@ const getContract = data => {
   return Contract
 }
 
-export const Hello = getContract(HelloData)
+export const RBACContract = getContract(JSONData)
