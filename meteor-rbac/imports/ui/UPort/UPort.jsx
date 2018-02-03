@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
-import { Modal } from 'antd'
+import { Modal, Spin } from 'antd'
+
 import { Accounts } from 'meteor/accounts-base'
 import MNID from 'mnid'
 
 import { contract, accounts } from '../../api'
 
-const confirm = Modal.confirm
-
 export default class UPort extends Component {
+  constructor (props) {
+    super(props)
+    this.state = { loading: false }
+  }
+
   render () {
+    const self = this
     !this.props.loading && contract.uport
       .requestCredentials({
         requested: ['name', 'phone', 'country', 'email'],
@@ -21,13 +26,13 @@ export default class UPort extends Component {
             if (result) {
               login(credentials)
             } else {
-              confirm({
+              Modal.info({
                 title: 'Register Confirm',
-                content: 'No account found. Do you want to call the contract to register?',
+                content: <p>No account found. Do you want to call the contract to register?</p>,
                 onOk () {
+                  self.setState({ loading: true })
                   accounts.register(address).then(() => login(credentials))
-                },
-                onCancel () { }
+                }
               })
             }
           })
@@ -35,7 +40,11 @@ export default class UPort extends Component {
       .catch(err => {
         throw err
       })
-    return <div />
+    return (
+      <Spin spinning={this.state.loading}>
+        <div style={{ height: '100vh', width: '100vw' }} />
+      </Spin>
+    )
   }
 }
 
