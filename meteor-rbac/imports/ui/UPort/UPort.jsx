@@ -14,7 +14,7 @@ export default class UPort extends Component {
 
   render () {
     const self = this
-    !this.props.loading && contract.uport
+    !this.props.loading && !this.state.loading && contract.uport
       .requestCredentials({
         requested: ['name', 'phone', 'country', 'email'],
         notifications: true

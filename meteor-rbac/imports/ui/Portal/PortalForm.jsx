@@ -38,7 +38,7 @@ export default class PortalForm extends React.Component {
     return (
       <Spin tip='Logging in...' spinning={this.state.loggingIn}>
         <Card title='Login' style={{ maxWidth: '300px', margin: '100px auto' }}>
-          <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={(e) => this.handleSubmit(e)}>
             <FormItem>
               {getFieldDecorator('username', {
                 rules: [{ required: true, message: 'Please input your username!' }]

@@ -11,17 +11,18 @@ const ProfileContainer = withTracker(props => {
   const accountHandle = Meteor.subscribe('account.all')
   const contactHandle = Meteor.subscribe('contact.all')
   const jobProfileHandle = Meteor.subscribe('jobProfile.all')
-  const loading = accountHandle && contactHandle && jobProfileHandle
+  const loading = !accountHandle.ready() || !contactHandle.ready() || !jobProfileHandle.ready()
   const id = FlowRouter.getParam('_id')
   const account = c.Account.findOne(id)
+  const contact = account && account.getContact()
   return {
     account,
     loading,
-    contact: account && account.getContact(),
+    contact,
     jobProfile: account && account.getJobProfile()
   }
 })(props =>
-  <Spin loading={props.loading}>
+  <Spin spinning={props.loading}>
     <Profile {...props} />
   </Spin>
 )
