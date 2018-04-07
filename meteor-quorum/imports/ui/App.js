@@ -12,7 +12,11 @@ export default class App extends Component {
       network,
       signer: SimpleSigner(signer)
     })
-    this.state = { credentials: null, account: null }
+    this.state = { credentials: null, account: null, value: 0 }
+  }
+
+  componentDidMount () {
+    this.getValue()
   }
 
   logInUPort () {
@@ -37,6 +41,30 @@ export default class App extends Component {
     })
   }
 
+  getValue () {
+    Meteor.call('simpleStorage.get', (err, res) => {
+      if (err) {
+        console.error(err)
+      } else {
+        this.setState({ value: res })
+      }
+    })
+  }
+
+  setValue () {
+    Meteor.call('simpleStorage.set', this.state.value, (err, res) => {
+      if (err) {
+        console.error(err)
+      } else {
+        console.log(res)
+      }
+    })
+  }
+
+  onChange (e) {
+    this.setState({ value: e.target.value })
+  }
+
   render () {
     return (
       <div>
@@ -58,6 +86,11 @@ export default class App extends Component {
             <dt>Role</dt>
             <dd>{this.state.account.role}</dd>
           </dl>}
+        </div>
+        <div className='simple-storage' >
+          <input type='number' value={this.state.value} onChange={e => this.onChange(e)} />
+          <button onClick={() => this.setValue()}>set</button>
+          <button onClick={() => this.getValue()}>get</button>
         </div>
       </div>
     )
