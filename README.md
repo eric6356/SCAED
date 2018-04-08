@@ -12,3 +12,6 @@ A role-based access control application written in meteor, using uPort for the i
 - [truffle](http://truffleframework.com/)
 - [React](https://reactjs.org/)
 - [Ant Design](https://ant.design/)
+
+## [METEOR-QUORUM](./meteor-quorum)
+A small demo shows the [Quorum](https://github.com/jpmorganchase/quorum) privacy feature.
