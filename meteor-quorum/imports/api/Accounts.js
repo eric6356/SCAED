@@ -4,9 +4,13 @@ import { Mongo } from 'meteor/mongo'
 export const Accounts = new Mongo.Collection('accounts')
 
 Meteor.methods({
-  'accounts.signIn' ({ address }) {
+  'accounts.signIn' ({ credentials, bank }) {
     if (Meteor.isServer) {
-      return Accounts.findOne({ address })
+      const { address } = credentials
+      const account = Accounts.findOne({ address })
+      if (account && account.banks.includes(bank)) {
+        return account
+      }
     }
   }
 })
